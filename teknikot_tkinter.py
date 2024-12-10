@@ -3,7 +3,7 @@ from tkinter import ttk
 import common_tkinter
 import teknikot
 # -------------------------------------------------------------------
-# Teknikko-välilehti
+"""Teknikko-välilehti"""
 def teknikot_valilehti(teknikot_frame):
 
     teknikon_tiedot(teknikot_frame)
@@ -11,7 +11,7 @@ def teknikot_valilehti(teknikot_frame):
     valmiusasteen_vaihto(teknikot_frame)
 
 # -------------------------------------------------------------------
-# Luo labelit ja entryt uuden teknikon tiedoille
+"""Luo labelit ja entryt uuden teknikon tiedoille"""
 def teknikon_tiedot(teknikot_frame):
 
     ttk.Label(teknikot_frame, text = "Uusi teknikko", style = "white2.TLabel") \
@@ -36,7 +36,7 @@ def teknikon_tiedot(teknikot_frame):
         command=lambda:teknikot.uusi_teknikko(teknikon_tiedot)) \
         .grid(column = 1, row = 20, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
 # -------------------------------------------------------------------
-# Valikot tiketin valitsemiseen ja tiketin valmiusasteen vaihtamiseksi
+"""Valikot tiketin valitsemiseen ja tiketin valmiusasteen vaihtamiseksi"""
 def valmiusasteen_vaihto(teknikot_frame):
 
     ttk.Label(teknikot_frame, text = "Vaihda tiketin valmiusastetta", style = "white2.TLabel") \

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 # -------------------------------------------------------------------
-# Käynnistää terminaalin ja luo tyylit widgeteille
+"""Käynnistää terminaalin ja luo tyylit widgeteille"""
 def terminaalin_aloitus():
     root = tk.Tk()
     root.title("Tikettijärjestelmä")
@@ -73,7 +73,7 @@ def buttons(frame, tiketti_frame, haku_frame, teknikot_frame):
         command = lambda:teknikot_frame.tkraise())
     b2.place(x = 199, y = 1, anchor = tk.NW)
 # -------------------------------------------------------------------
-# Luo otsikon etusivulle
+"""Luo otsikon etusivulle"""
 def etusivu_valilehti(etusivu_frame):
 
     otsikko = tk.Label(etusivu_frame, text = "Tikettijärjestelmä", foreground = "white", background = "#202020", font = ("Helvetica", 30))

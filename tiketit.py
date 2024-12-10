@@ -5,7 +5,7 @@ from asiakkaat import uusi_asiakas
 from laitteet import uusi_laite
 from common_tkinter import tee_label_teksti
 # -------------------------------------------------------------------
-# Luo uudelle tiketille ID:n ja ottaa vastaan tiketin tiedot
+"""Luo uudelle tiketille ID:n ja ottaa vastaan tiketin tiedot"""
 def uusi_tiketti():
 
     tiedosto = "tikettitiedot.txt"
@@ -20,7 +20,7 @@ def uusi_tiketti():
 
     return id
 # -------------------------------------------------------------------
-# Tallentaa tiketin tiedot tiedostoon
+"""Tallentaa tiketin tiedot tiedostoon"""
 def tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tiedot, vikakuvaus_entry):
     tiedosto = "tikettitiedot.txt"
 
@@ -59,7 +59,7 @@ def tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tie
         tee_label_teksti(tiketti_frame, "Tiedot tallennettu!", 345, 550)
         print("tietojen_tallennus onnistui")
 # -------------------------------------------------------------------
-# Luodaan tai haetaan asiakas_id tai laite_id
+"""Luodaan tai haetaan asiakas_id tai laite_id"""
 def luo_tai_hae_id(onko_uusi, uusi_funtio, tiedot_lista, tiedot, tiketin_tiedot_lista, tiedosto, nimike):
     # Jos asiakas/laite on uusi, luodaan uusi asiakas_id/laite_id ja tallennetaan asiakkaan/laitteen tiedot tiedostoon
     if onko_uusi == True:

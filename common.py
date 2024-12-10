@@ -1,5 +1,5 @@
 # -------------------------------------------------------------------
-# Tekee sanakirjan avatusta tiedostosta
+"""Tekee sanakirjan avatusta tiedostosta"""
 def avaa_tiedosto(tiedosto :str):
     sanakirja = {}
 
@@ -25,7 +25,7 @@ def avaa_tiedosto(tiedosto :str):
 
     return sanakirja
 # -------------------------------------------------------------------
-# Laskee montako ID:tä sanakirjassa on jo olemassa uuden ID:n luomista varten
+"""Laskee montako ID:tä sanakirjassa on jo olemassa uuden ID:n luomista varten"""
 def id_lukumaara(sanakirja :dict):
     laskuri = 0
 
@@ -34,7 +34,7 @@ def id_lukumaara(sanakirja :dict):
 
     return laskuri
 # -------------------------------------------------------------------
-# Luo uuden ID:n tunnuksesta (asiakas, laite, tiketti tai teknikko) ja riippuen ID:ein määrästä
+"""Luo uuden ID:n tunnuksesta (asiakas, laite, tiketti tai teknikko) ja riippuen ID:ein määrästä"""
 def luo_uusi_id(tunnus :str, montako :int):
     id = tunnus + str(montako)
 
@@ -43,7 +43,7 @@ def luo_uusi_id(tunnus :str, montako :int):
 
     return id
 # -------------------------------------------------------------------
-# Tallentaa tiedostoon yhden ID:n ja sen tiedot
+"""Tallentaa tiedostoon yhden ID:n ja sen tiedot"""
 def tallenna_tiedostoon(sanakirja: dict, tallennettava_id :str, tiedosto: str):
 
     with open(tiedosto, "a") as tied:
@@ -58,7 +58,7 @@ def tallenna_tiedostoon(sanakirja: dict, tallennettava_id :str, tiedosto: str):
                 rivi = rivi[:-1]
                 tied.write(rivi + "\n")
 # -------------------------------------------------------------------
-# Korvaa tiedoston tiedot sanakirjalla, joka sisältää kaikki ID:t ja niiden tiedot
+"""Korvaa tiedoston tiedot sanakirjalla, joka sisältää kaikki ID:t ja niiden tiedot"""
 def tallenna_tiedosto(sanakirja: dict, tiedosto: str):
 
     with open(tiedosto, "w") as tied:
@@ -72,7 +72,7 @@ def tallenna_tiedosto(sanakirja: dict, tiedosto: str):
                 rivi = rivi[:-1]
                 tied.write(rivi + "\n")
 # -------------------------------------------------------------------
-# Yhden ID:n tietojen haku tiedostosta
+"""Yhden ID:n tietojen haku tiedostosta"""
 def hae_tiedot_id(annettu_id: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -82,7 +82,7 @@ def hae_tiedot_id(annettu_id: str, tiedosto: str):
         if annettu_id == id:
             return tiedot
 # ------------------------------------------------------------------- 
-# Yhden tiedon tietojen haku
+"""Yhden tiedon tietojen haku"""
 def hae_tiedot(annettu_tieto: str, milla_tiedolla: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -91,7 +91,7 @@ def hae_tiedot(annettu_tieto: str, milla_tiedolla: str, tiedosto: str):
         if tiedot[milla_tiedolla] == annettu_tieto:
             return tiedot
 # ------------------------------------------------------------------- 
-# Kaikkien tietojen haku tiedolla (ei ID)
+"""Kaikkien tietojen haku tiedolla (ei ID)"""
 def hae_tiedot_kaikkien(milla_tiedolla: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -102,7 +102,7 @@ def hae_tiedot_kaikkien(milla_tiedolla: str, tiedosto: str):
 
     return lista
 # -------------------------------------------------------------------
-# Kaikkien tietojen haku tiedolla (ei ID), vain yksilölliset tiedot
+"""Kaikkien tietojen haku tiedolla (ei ID), vain yksilölliset tiedot"""
 def hae_tiedot_kaikkien_erit(milla_tiedolla: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -114,7 +114,7 @@ def hae_tiedot_kaikkien_erit(milla_tiedolla: str, tiedosto: str):
 
     return lista
 # -------------------------------------------------------------------
-# Useamman ID:n yhden tiedon haku ID:eillä (Jos id täsmää)
+"""Useamman ID:n yhden tiedon haku ID:eillä (Jos id täsmää)"""
 def hae_mahd_tieto_kaikki(idt: list, mika_tieto: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -126,7 +126,7 @@ def hae_mahd_tieto_kaikki(idt: list, mika_tieto: str, tiedosto: str):
 
     return lista
 # -------------------------------------------------------------------
-# ID:n haku tiedolla
+"""ID:n haku tiedolla"""
 def hae_id_tiedolla(tieto: str, milla_tiedolla: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -135,7 +135,7 @@ def hae_id_tiedolla(tieto: str, milla_tiedolla: str, tiedosto: str):
         if tiedot[milla_tiedolla] == tieto:
             return id
 # -------------------------------------------------------------------
-# Tiedon haku ID:llä
+"""Tiedon haku ID:llä"""
 def hae_tieto_id(annettu_id: str, mika_tieto: str, tiedosto: str):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -144,7 +144,7 @@ def hae_tieto_id(annettu_id: str, mika_tieto: str, tiedosto: str):
         if annettu_id == id:
             return tiedot[mika_tieto]
 # -------------------------------------------------------------------
-# Kaikkien täsmäävien tiedot
+"""Kaikkien täsmäävien tiedot"""
 def hae_tietoja(mika_tieto, tieto_nimike, tiedosto):
 
     sanakirja = avaa_tiedosto(tiedosto)
@@ -160,7 +160,7 @@ def hae_tietoja(mika_tieto, tieto_nimike, tiedosto):
 
     return lista
 # -------------------------------------------------------------------
-# Hakee ID:n entryn tiedolla sanakirjasta
+"""Hakee ID:n entryn tiedolla sanakirjasta"""
 def hae_id(tiedot_lista: list, tiedosto: str, tieto: str):
 
     # Haetaan entryn tieto get() metodilla
@@ -177,7 +177,7 @@ def hae_id(tiedot_lista: list, tiedosto: str, tieto: str):
 
     return haettava_id
 # -------------------------------------------------------------------
-# Tekee kahdesta listasta sanakirjan
+"""Tekee kahdesta listasta sanakirjan"""
 def lisaa_tiedot_sanakirjaan(tiedot_lista: list, tieto_nimikkeet: list):
 
     sanakirja = {}
@@ -188,7 +188,7 @@ def lisaa_tiedot_sanakirjaan(tiedot_lista: list, tieto_nimikkeet: list):
 
     return sanakirja
 # -------------------------------------------------------------------
-# Lue tiedot entryistä listaan
+"""Lue tiedot entryistä listaan"""
 def lue_tiedot(tiedot):
 
     tiedot_lista = []

@@ -1,7 +1,7 @@
 import tkinter as tk
 import common
 # -------------------------------------------------------------------
-# Asiakkaan tietojen haku ID:n, nimen tai emailin perusteella
+"""Asiakkaan tietojen haku ID:n, nimen tai emailin perusteella"""
 def hae_asiakkaan_tiedot(asiakkaan_entryt, asiakastiedot_entry):
 
     tiedosto = "asiakastiedot.txt"
@@ -41,28 +41,22 @@ def tietojen_taytto(tiedot_entry, tiedot, nimikkeet, tekstit):
             tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}")
         i += 1
 # -------------------------------------------------------------------
-# Laitteen tietojen haku ID:n tai sarjanumeron perusteella
-def hae_laitteen_tiedot(laitteen_entryt, laitetiedot_entry):
+"""Laitteen tietojen haku ID:n tai sarjanumeron perusteella"""
+def hae_laitteen_tiedot(laitteen_entry, laitteet_tiedot_entry):
 
     tiedosto = "laitetiedot.txt"
 
-    laitteen_id = laitteen_entryt[0].get()
-    laitteen_sarjanumero = laitteen_entryt[1].get()
+    laitteen_sarjanumero = laitteen_entry[0].get()
 
     laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
     laitteen_nimikkeet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
 
-    if laitteen_id != "":
-
-        tiedot = common.hae_tiedot_id(laitteen_id, tiedosto)
-        tietojen_taytto(laitetiedot_entry, tiedot, laitteen_nimikkeet, laitteen_tekstit)
-
-    elif laitteen_sarjanumero != "":
+    if laitteen_sarjanumero != "":
 
         tiedot = common.hae_tiedot(laitteen_sarjanumero, "sarjanumero", tiedosto)
-        tietojen_taytto(laitetiedot_entry, tiedot, laitteen_nimikkeet, laitteen_tekstit)
+        tietojen_taytto(laitteet_tiedot_entry, tiedot, laitteen_nimikkeet, laitteen_tekstit)
 # -------------------------------------------------------------------
-# Luo valikot laitetyypeille ja -malleille
+"""Luo valikot laitetyypeille ja -malleille"""
 def laitteet_valikko(laite_combobox, milla_tiedolla):
 
     tiedosto = "laitetiedot.txt"
@@ -72,7 +66,7 @@ def laitteet_valikko(laite_combobox, milla_tiedolla):
     laite_combobox.configure(values = tiedot)
     laite_combobox.set(tiedot[0])
 # -------------------------------------------------------------------
-# Useamman laitteen haku laitetyypin tai laitemallin perusteella
+"""Useamman laitteen haku laitetyypin tai laitemallin perusteella"""
 def laitteet_valikko_event(event, laite_combobox, tieto_nimike, laitteet_tiedot_entry):
 
     tiedosto = "laitetiedot.txt"
@@ -86,7 +80,7 @@ def laitteet_valikko_event(event, laite_combobox, tieto_nimike, laitteet_tiedot_
 
     tietojen_taytto_useat(laitteet_tiedot_entry, tiedot_lista, laitteen_nimikkeet, laitteen_tekstit, mika_tieto)
 # -------------------------------------------------------------------
-# Täyttää tiedot entryyn
+"""Täyttää tiedot entryyn"""
 def tietojen_taytto_useat(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mika_tieto):
 
     tiedot_entry.delete('1.0', tk.END)
@@ -113,7 +107,7 @@ def tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto
     else:
         tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}{rivinvaihto}")
 # -------------------------------------------------------------------
-# Täyttää tiedot entryyn + tiketin ID
+"""Täyttää tiedot entryyn + tiketin ID"""
 def tietojen_taytto_useat_id(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mika_tieto, tiketin_id_teksti):
 
     tiedot_entry.delete('1.0', tk.END)
@@ -131,42 +125,7 @@ def tietojen_taytto_useat_id(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mik
         else:
             tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, "")
 # -------------------------------------------------------------------
-# Tiketin tietojen haku ID:n perusteella
-def hae_tiketin_tiedot(tiketin_id_entry, tiketin_tiedot_entry):
-
-    tiedosto = "tikettitiedot.txt"
-
-    tiketin_id = tiketin_id_entry.get()
-
-    tiketin_tekstit = ["Asiakkaan ID:", "Laitteen ID:", "Valmiusaste:", "Teknikon ID:", "Laitteen vika:"]
-    tiketin_nimikkeet = ["asiakas_id", "laite_id", "valmiusaste", "teknikko_id", "vika"]
-
-    tiedot = common.hae_tiedot_id(tiketin_id, tiedosto)
-    tietojen_taytto(tiketin_tiedot_entry, tiedot, tiketin_nimikkeet, tiketin_tekstit)
-# -------------------------------------------------------------------
-# Tikettien tietojen haku asiakas/laite ID:n perusteella
-def hae_tikettien_tiedot(tiketin_entryt, tiketit_tiedot_entry):
-
-    tiedosto = "tikettitiedot.txt"
-
-    asiakkaan_id = tiketin_entryt[0].get()
-    laitteen_id = tiketin_entryt[1].get()
-
-    tiketin_id_teksti = "Tiketin ID:"
-    tiketin_tekstit = ["Asiakkaan ID:", "Laitteen ID:", "Valmiusaste:", "Teknikon ID:", "Laitteen vika:"]
-    tiketin_nimikkeet = ["asiakas_id", "laite_id", "valmiusaste", "teknikko_id", "vika"]
-
-    if asiakkaan_id != "":
-
-        tiedot_lista = common.hae_tietoja(asiakkaan_id, "asiakas_id", tiedosto)
-        tietojen_taytto_useat_id(tiketit_tiedot_entry, tiedot_lista, tiketin_nimikkeet, tiketin_tekstit, asiakkaan_id, tiketin_id_teksti)
-
-    elif laitteen_id != "":
-
-        tiedot_lista = common.hae_tietoja(laitteen_id, "laite_id", tiedosto)
-        tietojen_taytto_useat_id(tiketit_tiedot_entry, tiedot_lista, tiketin_nimikkeet, tiketin_tekstit, laitteen_id, tiketin_id_teksti)
-# -------------------------------------------------------------------
-# Valmiusasteiden asetus valikkoon
+"""Valmiusasteiden asetus valikkoon"""
 def tiketit_haku_valmiusaste(valmiusaste_combobox):
 
     tiedot = ["Vastaanotettu", "Työnalla", "Valmis"]
@@ -174,7 +133,7 @@ def tiketit_haku_valmiusaste(valmiusaste_combobox):
     valmiusaste_combobox.configure(values = tiedot)
     valmiusaste_combobox.set(tiedot[0])
 # -------------------------------------------------------------------
-# Tikettien tietojen haku valmiusasteen perusteella
+"""Tikettien tietojen haku valmiusasteen perusteella"""
 def valmiusaste_valikko_event(event, valmiusaste_combobox, valmiusaste_tikettien_tiedot_entry):
 
     tiedosto = "tikettitiedot.txt"
@@ -182,7 +141,7 @@ def valmiusaste_valikko_event(event, valmiusaste_combobox, valmiusaste_tikettien
     valittu_valmiusaste = valmiusaste_combobox.get()
 
     tiketin_id_teksti = "Tiketin ID:"
-    tiketin_tekstit = ["Asiakkaan ID:", "Laitteen ID:", "Valmiusaste:", "Teknikon ID:", "Laitteen vika:"]
+    tiketin_tekstit = ["Asiakkaan nimi:", "Laitteen sarjanumero:", "Valmiusaste:", "Teknikon nimi:", "Laitteen vika:"]
     tiketin_nimikkeet = ["asiakas_id", "laite_id", "valmiusaste", "teknikko_id", "vika"]
 
     tiedot_lista = common.hae_tietoja(valittu_valmiusaste, "valmiusaste", tiedosto)
