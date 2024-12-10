@@ -3,8 +3,8 @@ import common
 from laitteet import vanhat_laitteet_valikko
 import tkinter as tk
 # -------------------------------------------------------------------
-"""Luo uudelle asiakkaalle ID:n ja ottaa vastaan asiakkaan tiedot"""
 def uusi_asiakas(asiakas_tiedot_lista):
+    """Luo uudelle asiakkaalle ID:n ja ottaa vastaan asiakkaan tiedot"""
 
     tiedosto = "asiakastiedot.txt"
     # Lukee tiedostosta olemassa olevien asiakkaiden tiedot sanakirjaan
@@ -25,8 +25,8 @@ def uusi_asiakas(asiakas_tiedot_lista):
     common.tallenna_tiedostoon(asiakkaat_sanakirja, id, tiedosto)
     return id
 # -------------------------------------------------------------------
-"""Haetaan vanhan asiakkaan tiedot ID:llä ja sijoitetaan entry-muuttujiin näkymään terminaaliin"""
 def vanha_asiakas(asiakkaan_tiedot, asiakkaan_entryt, vanhat_laitteet_combobox):
+    """Haetaan vanhan asiakkaan tiedot ID:llä ja sijoitetaan entry-muuttujiin näkymään terminaaliin"""
 
     asiakas_id = common.hae_id(asiakkaan_tiedot, "asiakastiedot.txt", "nimi")
 
@@ -47,7 +47,3 @@ def vanha_asiakas(asiakkaan_tiedot, asiakkaan_entryt, vanhat_laitteet_combobox):
 
         vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_combobox)
 # -------------------------------------------------------------------
-
-if __name__ == "__main__":
-
-    uusi_asiakas()

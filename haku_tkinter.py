@@ -3,8 +3,8 @@ from tkinter import ttk
 import common_tkinter
 import haku
 # -------------------------------------------------------------------
-"""Tiedonhaku"""
 def haku_valilehti(haku_frame):
+    """Tiedonhaku"""
 
     ttk.Label(haku_frame, text = "Asiakastiedot", style = "white2.TLabel") \
         .grid(column = 0, row = 1, columnspan = 2, \
@@ -24,8 +24,8 @@ def haku_valilehti(haku_frame):
     
     valmiusaste_haku(haku_frame)
 # -------------------------------------------------------------------
-"""Asiakkaan tietojen haku asiakkaan ID:llä, nimellä tai emaililla"""
 def asiakastietojen_haku(haku_frame):
+    """Asiakkaan tietojen haku asiakkaan ID:llä, nimellä tai emaililla"""
 
     tiedot_lista = ["Asiakkaan nimi:", "tai Asiakkaan email-osoite:"]
 
@@ -47,8 +47,8 @@ def asiakastietojen_haku(haku_frame):
         command=lambda:haku.hae_asiakkaan_tiedot(asiakkaan_entryt, asiakastiedot_entry)) \
         .grid(column = 1, row = 10, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
 # -------------------------------------------------------------------
-"""Laitteen tietojen haku laitteen ID:n tai sarjanumeron perusteella"""
 def laitetietojen_haku(haku_frame):
+    """Laitteen tietojen haku laitteen ID:n tai sarjanumeron perusteella"""
 
     tiedot_lista = ["Laitteen sarjanumero:"]
     laitteen_sarjanumero = tk.StringVar()
@@ -76,8 +76,8 @@ def laitetietojen_haku(haku_frame):
     insertbackground = "white", font = ("Helvetica", 10))
     laitteet_tiedot_entry.grid(column = 10, row = 11, columnspan = 4, sticky = tk.W, padx = [5, 0])
 # -------------------------------------------------------------------
-"""Tikettien tietojen haku valmiusasteella"""
 def valmiusaste_haku(haku_frame):
+    """Tikettien tietojen haku valmiusasteella"""
 
     valmiusaste_combobox = common_tkinter.luo_valikko(haku_frame, "Tiketin valmiusaste", 20, 3)
 
@@ -89,4 +89,3 @@ def valmiusaste_haku(haku_frame):
     insertbackground = "white", font = ("Helvetica", 10))
     valmiusaste_tikettien_tiedot_entry.grid(column = 20, row = 11, columnspan = 4, sticky = tk.W, padx = [5, 0])
 # -------------------------------------------------------------------
-

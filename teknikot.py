@@ -1,8 +1,8 @@
 import common
 import common_tkinter
 # -------------------------------------------------------------------
-"""Luo uudelle teknikolle ID:n ja ottaa vastaan teknikon tiedot"""
 def uusi_teknikko(teknikon_tiedot):
+    """Luo uudelle teknikolle ID:n ja ottaa vastaan teknikon tiedot"""
 
     tiedosto = "teknikkotiedot.txt"
     # Lukee tiedostosta olemassa olevien teknikoiden tiedot sanakirjaan
@@ -26,16 +26,16 @@ def uusi_teknikko(teknikon_tiedot):
     # Tallentaa teknikon tiedot tiedostoon
     common.tallenna_tiedostoon(teknikot_sanakirja, teknikon_id, tiedosto)
 # -------------------------------------------------------------------
-"""Täytetään asiakkaiden nimet valikkoon"""
 def asiakkaat_valikko_nimet(asiakkaat_combobox):
+    """Täytetään asiakkaiden nimet valikkoon"""
 
     asiakkaat_nimet = hae_mahdolliset_asiakkaat()
 
     asiakkaat_combobox.configure(values = asiakkaat_nimet)
     asiakkaat_combobox.set(asiakkaat_nimet[0])
 # -------------------------------------------------------------------
-"""Haetaan asiakkaiden nimet"""
 def hae_mahdolliset_asiakkaat():
+    """Haetaan asiakkaiden nimet"""
 
     mahd_asiakas_idt = hae_mahd_asiakas_idt()
 
@@ -48,8 +48,8 @@ def hae_mahdolliset_asiakkaat():
 
     return mahd_asiakas_nimet
 # -------------------------------------------------------------------
-"""Haetaan asiakkaiden ID:t, joilla on vastaanotettu tai työnalla oleva tiketti"""
 def hae_mahd_asiakas_idt():
+    """Haetaan asiakkaiden ID:t, joilla on vastaanotettu tai työnalla oleva tiketti"""
 
     tiketit_sanakirja = common.avaa_tiedosto("tikettitiedot.txt")
     mahd_asiakas_idt = []
@@ -62,8 +62,8 @@ def hae_mahd_asiakas_idt():
 
     return mahd_asiakas_idt
 # -------------------------------------------------------------------
-"""Täytetään asiakkaan laitteiden mallit valikkoon"""
 def laitteet_valikko_mallit(event, teknikot_frame, asiakkaat_combobox, laitteet_combobox):
+    """Täytetään asiakkaan laitteiden mallit valikkoon"""
 
     laitteet_idt_ja_mallit = laitteen_valinta(asiakkaat_combobox)
 
@@ -72,8 +72,8 @@ def laitteet_valikko_mallit(event, teknikot_frame, asiakkaat_combobox, laitteet_
 
     tiketti_id_ja_teknikko_id = vaihda_valittua_tikettia(teknikot_frame, asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_mallit)
 # -------------------------------------------------------------------
-"""Haetaan valitun asiakkaan laitteet, joiden tiketti on vastaanotettu tai työnalla"""
 def laitteen_valinta(asiakkaat_combobox):
+    """Haetaan valitun asiakkaan laitteet, joiden tiketti on vastaanotettu tai työnalla"""
 
     valittu_asiakas_nimi = asiakkaat_combobox.get()
 
@@ -92,8 +92,8 @@ def laitteen_valinta(asiakkaat_combobox):
 
     return [haettavat_laitteet_idt, haettavat_laitteet_mallit]
 # -------------------------------------------------------------------
-"""Hakee tiketin ID:n ja näyttää sen terminaalissa"""
 def vaihda_valittua_tikettia(teknikot_frame, asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_mallit):
+    """Hakee tiketin ID:n ja näyttää sen terminaalissa"""
 
     tiketti_id_ja_teknikko_id = hae_idt_valinnoilla(asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_mallit)
 
@@ -101,8 +101,8 @@ def vaihda_valittua_tikettia(teknikot_frame, asiakkaat_combobox, laitteet_combob
 
     return tiketti_id_ja_teknikko_id
 # -------------------------------------------------------------------
-"""Haetaan tiketin ID valitun laitteen ja asiakkaan perusteella"""
 def hae_idt_valinnoilla(asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_mallit):
+    """Haetaan tiketin ID valitun laitteen ja asiakkaan perusteella"""
 
     valittu_laite_malli = laitteet_combobox.get()
 
@@ -126,8 +126,8 @@ def hae_idt_valinnoilla(asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_m
 
                     return [tiketti_id, tiedot["teknikko_id"]]
 # -------------------------------------------------------------------
-"""Vaihtaa tiketin ID:tä, kun valittua laitetta vaihdetaan"""
 def laitteet_valikko_event(event, teknikot_frame, asiakkaat_combobox, laitteet_combobox, valmiusasteet_combobox, teknikot_combobox):
+    """Vaihtaa tiketin ID:tä, kun valittua laitetta vaihdetaan"""
 
     laitteet_idt_ja_mallit = laitteen_valinta(asiakkaat_combobox)
 
@@ -150,8 +150,8 @@ def laitteet_valikko_event(event, teknikot_frame, asiakkaat_combobox, laitteet_c
     valmiusasteet_combobox.configure(values = valmiusasteet_lista)
     valmiusasteet_combobox.set(valmiusasteet_lista[0])
 # -------------------------------------------------------------------
-"""Täytetään teknikkojen nimet valikkoon"""
 def teknikot_valikko_nimet(teknikot_combobox):
+    """Täytetään teknikkojen nimet valikkoon"""
 
     teknikot_nimet = common.hae_tiedot_kaikkien("nimi", "teknikkotiedot.txt")
 

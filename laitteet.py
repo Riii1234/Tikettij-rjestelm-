@@ -2,8 +2,8 @@ import globals
 import common
 import tkinter as tk
 # -------------------------------------------------------------------
-"""Luo uudelle laitteelle ID:n ja ottaa vastaan laitteen tiedot"""
 def uusi_laite(laitteen_tiedot_lista):
+    """Luo uudelle laitteelle ID:n ja ottaa vastaan laitteen tiedot"""
 
     tiedosto = "laitetiedot.txt"
     # Lukee tiedostosta olemassa olevien laitteiden tiedot sanakirjaan
@@ -26,8 +26,8 @@ def uusi_laite(laitteen_tiedot_lista):
     common.tallenna_tiedostoon(laitteet_sanakirja, id, tiedosto)
     return id
 # -------------------------------------------------------------------
-"""Hakee vanhan laitteen tiedot mallin avulla"""
 def vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli):
+    """Hakee vanhan laitteen tiedot mallin avulla"""
 
     haettavat_laitteet = vanhat_laitteet(asiakkaan_tiedot)
 
@@ -48,23 +48,23 @@ def vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli):
                     laitteen_entryt[i].insert(0, tiedot[lista[i]])
 
 # -------------------------------------------------------------------
-"""Hakee laitteen mallin entry-widgetistä"""
 def vanhat_laitteet_nappi(laitteen_malli, laitteen_entryt, asiakkaan_tiedot):
+    """Hakee laitteen mallin entry-widgetistä"""
 
     laite_malli = laitteen_malli.get()
     print("vanhat_laitteet_nappi - laite_malli", laite_malli)
 
     vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli)
 # -------------------------------------------------------------------
-"""Antaa tällä hetkellä valitun laitteen valikosta"""
 def vanha_laite_valikko(event, laitteen_entryt, asiakkaan_tiedot, vanhat_laitteet_combobox):
+    """Antaa tällä hetkellä valitun laitteen valikosta"""
 
     laite_malli = vanhat_laitteet_combobox.get()
 
     vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli)
 # -------------------------------------------------------------------
-"""Hakee vanhat laitteet asiakkaan ID:llä"""
 def vanhat_laitteet(asiakkaan_tiedot):
+    """Hakee vanhat laitteet asiakkaan ID:llä"""
 
     #print("vanhat_laitteet asiakkaan_tiedot", asiakkaan_tiedot)
 
@@ -80,16 +80,16 @@ def vanhat_laitteet(asiakkaan_tiedot):
 
     return haettavat_laitteet
 # -------------------------------------------------------------------
-"""Asettaa asiakkaan vanhat laitteet valikkoon"""
 def vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_combobox):
+    """Asettaa asiakkaan vanhat laitteet valikkoon"""
 
     laitteet_lista = vanhat_laite_mallit(asiakkaan_tiedot)
     
     vanhat_laitteet_combobox.configure(values = laitteet_lista)
     vanhat_laitteet_combobox.set(laitteet_lista[0])
 # -------------------------------------------------------------------
-"""Hakee laitteiden mallit"""
 def vanhat_laite_mallit(asiakkaan_tiedot):
+    """Hakee laitteiden mallit"""
 
     haettavat_laitteet = vanhat_laitteet(asiakkaan_tiedot)
 
@@ -102,7 +102,3 @@ def vanhat_laite_mallit(asiakkaan_tiedot):
 
     return laite_mallit
 # -------------------------------------------------------------------
-
-if __name__ == "__main__":
-
-    uusi_laite()

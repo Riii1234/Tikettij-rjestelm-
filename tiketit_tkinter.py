@@ -5,8 +5,8 @@ from tiketit import uusi_tiketti, tietojen_tallennus
 from asiakkaat import vanha_asiakas
 from laitteet import vanha_laite_valikko, vanhat_laitteet_nappi
 # -------------------------------------------------------------------
-"""Tiketin luonti, ottaa vastaan tiketti_framen"""
 def tiketti_valilehti(tiketti_frame):
+    """Tiketin luonti, ottaa vastaan tiketti_framen"""
 
     tiketti_id = luo_tiketin_id(tiketti_frame)
 
@@ -19,8 +19,8 @@ def tiketti_valilehti(tiketti_frame):
 
     tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tiedot, vikakuvaus_entry)
 # -------------------------------------------------------------------
-"""Luo uuden tiketin (ID)"""
 def luo_tiketin_id(tiketti_frame):
+    """Luo uuden tiketin (ID)"""
 
     tiketti_id = uusi_tiketti()
     ttk.Label(tiketti_frame, text = f" Tiketin ID: {tiketti_id} ", style = "white2.TLabel") \
@@ -29,8 +29,8 @@ def luo_tiketin_id(tiketti_frame):
 
     return tiketti_id
 # -------------------------------------------------------------------
-"""Valikko asiakkaan vanhoista laitteista"""
 def laitteet_valikko(tiketti_frame):
+    """Valikko asiakkaan vanhoista laitteista"""
     
     ttk.Label(tiketti_frame, text = "Vanhat laitteet", style = "white.TLabel") \
         .grid(column = 10, row = 3, columnspan = 2, sticky = tk.E, padx = [112, 0], pady = [20, 0])
@@ -42,8 +42,8 @@ def laitteet_valikko(tiketti_frame):
 
     return vanhat_laitteet_combobox
 # -------------------------------------------------------------------
-"""Tekee entryt asiakkaan tiedoille ja hakee niihin mahdolliset vanhat tiedot"""
 def asiakas_tiedot(tiketti_frame, vanhat_laitteet_combobox):
+    """Tekee entryt asiakkaan tiedoille ja hakee niihin mahdolliset vanhat tiedot"""
 
     tiedot_lista = ["Asiakkaan nimi:", "Asiakkaan osoite:", "Asiakkaan puh.numero:", "Asiakkaan email-osoite:"]
     asiakkaan_nimi = tk.StringVar()
@@ -67,8 +67,8 @@ def asiakas_tiedot(tiketti_frame, vanhat_laitteet_combobox):
 
     return asiakkaan_tiedot
 # -------------------------------------------------------------------
-"""Tekee entryt laitteen tiedoille ja hakee niihin mahdolliset vanhat tiedot"""
 def laite_tiedot(tiketti_frame, asiakkaan_tiedot, vanhat_laitteet_combobox):
+    """Tekee entryt laitteen tiedoille ja hakee niihin mahdolliset vanhat tiedot"""
 
     tiedot_lista = ["Laitteen malli:", "Laitteen tyyppi:", "Laitteen sarjanumero:", "Laitteen tuotetunnus:", "Laitteen lisätiedot: (valinnainen)"]
 
@@ -99,8 +99,8 @@ def laite_tiedot(tiketti_frame, asiakkaan_tiedot, vanhat_laitteet_combobox):
 
     return laitteen_tiedot
 # -------------------------------------------------------------------
-"""Luo monirivisen teksti-kentän vikakuvaukselle"""
 def vikakuvaus(tiketti_frame):
+    """Luo monirivisen teksti-kentän vikakuvaukselle"""
 
     ttk.Label(tiketti_frame, text = "Laitteen vikakuvaus: ", style = "white.TLabel") \
         .grid(column = 1, row = 20, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [20, 2])
@@ -110,11 +110,10 @@ def vikakuvaus(tiketti_frame):
 
     return vikakuvaus_entry
 # -------------------------------------------------------------------
-"""Luo buttonin tiketin tallentamiseksi"""
 def tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tiedot, vikakuvaus_entry):
+    """Luo buttonin tiketin tallentamiseksi"""
 
     ttk.Button(tiketti_frame, text = "Tallenna tiedot", style = "bw2.TButton", \
         command=lambda:tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tiedot, vikakuvaus_entry)) \
         .grid(column = 10, row = 21, columnspan = 2, sticky = tk.E, padx = [5, 0], pady = [5, 5])
 # -------------------------------------------------------------------
-

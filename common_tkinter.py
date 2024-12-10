@@ -22,8 +22,8 @@ def tee_label_teksti(frame, teksti, vaakarivi, pystyrivi):
     ttk.Label(frame, text = teksti, style = "white.TLabel") \
         .place(x = vaakarivi, y = pystyrivi, anchor = tk.NW)
 # ------------------------------------------------------------------- 
-"""Luo teksti-labelit ja entry-kohdat asiakkaan tai laitteen tiedoille"""
 def luo_labelit_ja_entryt(frame, tiedot_lista, entryt, tiedot, pystyrivi, vaakarivi):
+    """Luo teksti-labelit ja entry-kohdat asiakkaan tai laitteen tiedoille"""
 
     i = 0
     rivi_laskuri = vaakarivi
