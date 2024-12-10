@@ -29,8 +29,6 @@ def terminaalin_aloitus():
 
     return root
 # -------------------------------------------------------------------
-#root = terminaalin_aloitus()
-# -------------------------------------------------------------------
 from common_tkinter import luo_frame
 from tiketit_tkinter import tiketti_valilehti
 from haku_tkinter import haku_valilehti
@@ -83,4 +81,3 @@ def etusivu_valilehti(etusivu_frame):
     otsikko.grid(column = 0, row = 0)
 # ------------------------------------------------------------------- 
 
-#terminaalin_sisalto(root)

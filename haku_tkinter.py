@@ -24,6 +24,7 @@ def haku_valilehti(haku_frame):
     
     tikettitietojen_haku(haku_frame)
 # -------------------------------------------------------------------
+# Asiakkaan tietojen haku asiakkaan ID:llä, nimellä tai emaililla
 def asiakastietojen_haku(haku_frame):
 
     tiedot_lista = ["Asiakkaan ID:", "tai Asiakkaan nimi:", "tai Asiakkaan email-osoite:"]
@@ -47,6 +48,7 @@ def asiakastietojen_haku(haku_frame):
         command=lambda:haku.hae_asiakkaan_tiedot(asiakkaan_entryt, asiakastiedot_entry)) \
         .grid(column = 1, row = 10, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
 # -------------------------------------------------------------------
+# Laitteen tietojen haku laitteen ID:n tai sarjanumeron perusteella
 def laitetietojen_haku(haku_frame):
 
     tiedot_lista = ["Laitteen ID:", "tai Laitteen sarjanumero:"]
@@ -81,6 +83,7 @@ def laitetietojen_haku(haku_frame):
     insertbackground = "white", font = ("Helvetica", 10))
     laitteet_tiedot_entry.grid(column = 10, row = 16, columnspan = 4, sticky = tk.W, padx = [5, 0])
 # -------------------------------------------------------------------
+# 
 def tikettitietojen_haku(haku_frame):
 
     tiketin_tietojen_haku_tiketti_id(haku_frame)
@@ -89,6 +92,7 @@ def tikettitietojen_haku(haku_frame):
 
     valmiusaste_haku(haku_frame)
 # -------------------------------------------------------------------
+# Tiketin tietojen haku tiketin ID:llä
 def tiketin_tietojen_haku_tiketti_id(haku_frame):
 
     tiketin_id = tk.StringVar()
@@ -107,6 +111,7 @@ def tiketin_tietojen_haku_tiketti_id(haku_frame):
         command=lambda:haku.hae_tiketin_tiedot(tiketin_id_entry, tiketin_tiedot_entry)) \
         .grid(column = 20, row = 5, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
  # -------------------------------------------------------------------
+ # Tikettien tietojen haku asiakkaan tai laitteen ID:llä
 def tikettien_tietojen_haku(haku_frame):
 
     tiedot_lista = ["Asiakkaan ID:", "tai Laitteen ID:"]
@@ -128,6 +133,7 @@ def tikettien_tietojen_haku(haku_frame):
         command=lambda:haku.hae_tikettien_tiedot(tiketin_entryt, tiketit_tiedot_entry)) \
         .grid(column = 20, row = 15, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
 # -------------------------------------------------------------------
+# Tikettien tietojen haku valmiusasteella
 def valmiusaste_haku(haku_frame):
 
     valmiusaste_combobox = common_tkinter.luo_valikko(haku_frame, "Tiketin valmiusaste", 20, 20)
