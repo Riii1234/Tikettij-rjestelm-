@@ -3,7 +3,6 @@ import tkinter as tk
 import common
 from asiakkaat import uusi_asiakas
 from laitteet import uusi_laite
-from common_tkinter import tee_label_teksti
 # -------------------------------------------------------------------
 def uusi_tiketti():
     """Luo uudelle tiketille ID:n ja ottaa vastaan tiketin tiedot"""
@@ -20,12 +19,12 @@ def uusi_tiketti():
 
     return id
 # -------------------------------------------------------------------
-def tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tiedot, vikakuvaus_entry):
+def tietojen_tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry):
     """Tallentaa tiketin tiedot tiedostoon"""
     tiedosto = "tikettitiedot.txt"
 
-    asiakas_tiedot_lista = common.lue_tiedot(asiakkaan_tiedot)
-    laitteen_tiedot_lista = common.lue_tiedot(laitteen_tiedot)
+    asiakas_tiedot_lista = common.lue_tiedot(asiakas_muuttujat)
+    laitteen_tiedot_lista = common.lue_tiedot(laite_muuttujat)
     tiketin_tiedot_lista = []
 
     # Luetaan vikakuvaus entrystä
@@ -34,12 +33,13 @@ def tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tie
 
     # Jos tarvittavia tietoja puuttuu
     if "" in asiakas_tiedot_lista or "" in laitteen_tiedot_lista[:-1] or vikakuvaus == "":
-        tee_label_teksti(tiketti_frame, "Täytä puuttuvat tiedot!", 345, 550)
+        #tee_label_teksti(tiketti_frame, "Täytä puuttuvat tiedot!", 345, 550)
+        pass
 
     else:
-        tiketin_tiedot_lista = luo_tai_hae_id(globals.onko_uusi_asiakas, uusi_asiakas, asiakas_tiedot_lista, asiakkaan_tiedot, tiketin_tiedot_lista, "asiakastiedot.txt", "nimi")
+        tiketin_tiedot_lista = luo_tai_hae_id(globals.onko_uusi_asiakas, uusi_asiakas, asiakas_tiedot_lista, asiakas_muuttujat, tiketin_tiedot_lista, "asiakastiedot.txt", "nimi")
 
-        tiketin_tiedot_lista = luo_tai_hae_id(globals.onko_uusi_laite, uusi_laite, laitteen_tiedot_lista, laitteen_tiedot, tiketin_tiedot_lista, "laitetiedot.txt", "malli")
+        tiketin_tiedot_lista = luo_tai_hae_id(globals.onko_uusi_laite, uusi_laite, laitteen_tiedot_lista, laite_muuttujat, tiketin_tiedot_lista, "laitetiedot.txt", "malli")
 
         tiketin_tiedot_lista.append("Vastaanotettu")
         # Tikettiä työstävä teknikko on tikettiä luotaessa tyhjä
@@ -56,7 +56,7 @@ def tietojen_tallennus(tiketti_frame, tiketti_id, asiakkaan_tiedot, laitteen_tie
     
         # Tallentaa tiketin tiedot tiedostoon
         common.tallenna_tiedostoon(tiketit_sanakirja, tiketti_id, tiedosto)
-        tee_label_teksti(tiketti_frame, "Tiedot tallennettu!", 345, 550)
+        #tee_label_teksti(tiketti_frame, "Tiedot tallennettu!", 345, 550)
         print("tietojen_tallennus onnistui")
 # -------------------------------------------------------------------
 def luo_tai_hae_id(onko_uusi, uusi_funtio, tiedot_lista, tiedot, tiketin_tiedot_lista, tiedosto, nimike):

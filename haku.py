@@ -1,47 +1,43 @@
 import tkinter as tk
 import common
 # -------------------------------------------------------------------
-def hae_asiakkaan_tiedot(asiakkaan_entryt, asiakastiedot_entry):
+def hae_asiakkaan_tiedot(asiakas_entryt, asiakastieto_kentta):
     """Asiakkaan tietojen haku ID:n, nimen tai emailin perusteella"""
 
     tiedosto = "asiakastiedot.txt"
 
-    asiakkaan_id = asiakkaan_entryt[0].get()
-    asiakkaan_nimi = asiakkaan_entryt[1].get()
-    asiakkaan_email = asiakkaan_entryt[2].get()
+    asiakas_nimi = asiakas_entryt[0].get()
+    asiakas_email = asiakas_entryt[1].get()
 
-    asiakkaan_tekstit = ["Nimi:", "Osoite:", "Puh.numero:", "Email:"]
-    asiakkaan_nimikkeet = ["nimi", "osoite", "puh.numero", "email"]
+    asiakas_tekstit = ["Nimi:", "Osoite:", "Puh.numero:", "Email:"]
+    asiakas_avaimet = ["nimi", "osoite", "puh.numero", "email"]
+    montako_valia = [12, 9, 1, 11]
 
-    if asiakkaan_id != "":
+    if asiakas_nimi != "":
 
-        tiedot = common.hae_tiedot_id(asiakkaan_id, tiedosto)
-        tietojen_taytto(asiakastiedot_entry, tiedot, asiakkaan_nimikkeet, asiakkaan_tekstit)
+        tiedot = common.hae_tiedot(asiakas_nimi, "nimi", tiedosto)
+        tietojen_taytto(asiakastieto_kentta, tiedot, asiakas_avaimet, asiakas_tekstit, montako_valia)
 
-    elif asiakkaan_nimi != "":
+    elif asiakas_email != "":
 
-        tiedot = common.hae_tiedot(asiakkaan_nimi, "nimi", tiedosto)
-        tietojen_taytto(asiakastiedot_entry, tiedot, asiakkaan_nimikkeet, asiakkaan_tekstit)
-
-    elif asiakkaan_email != "":
-
-        tiedot = common.hae_tiedot(asiakkaan_email, "email", tiedosto)
-        tietojen_taytto(asiakastiedot_entry, tiedot, asiakkaan_nimikkeet, asiakkaan_tekstit)
+        tiedot = common.hae_tiedot(asiakas_email, "email", tiedosto)
+        tietojen_taytto(asiakastieto_kentta, tiedot, asiakas_avaimet, asiakas_tekstit, montako_valia)
 # -------------------------------------------------------------------
-def tietojen_taytto(tiedot_entry, tiedot, nimikkeet, tekstit):
+def tietojen_taytto(tieto_kentta, tiedot, avaimet, tekstit, montako_valia):
 
-    tiedot_entry.delete('1.0', tk.END)
+    tieto_kentta.delete('1.0', tk.END)
 
     i = 0
+    vali = " "
     while i < len(tekstit):
         if i < len(tekstit) - 1:
             # Sijoitetaan tiedot terminaaliin
-            tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}\n")
+            tieto_kentta.insert(tk.END, f"{tekstit[i]} {vali * montako_valia[i]} {tiedot[avaimet[i]]}\n")
         else:
-            tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}")
+            tieto_kentta.insert(tk.END, f"{tekstit[i]} {vali * montako_valia[i]} {tiedot[avaimet[i]]}")
         i += 1
 # -------------------------------------------------------------------
-def hae_laitteen_tiedot(laitteen_entry, laitteet_tiedot_entry):
+def hae_laitteen_tiedot(laitteen_entry, laitetieto_kentta):
     """Laitteen tietojen haku ID:n tai sarjanumeron perusteella"""
 
     tiedosto = "laitetiedot.txt"
@@ -49,12 +45,13 @@ def hae_laitteen_tiedot(laitteen_entry, laitteet_tiedot_entry):
     laitteen_sarjanumero = laitteen_entry[0].get()
 
     laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
-    laitteen_nimikkeet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    laitteen_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    montako_valia = [13, 10, 1, 2, 6]
 
     if laitteen_sarjanumero != "":
 
         tiedot = common.hae_tiedot(laitteen_sarjanumero, "sarjanumero", tiedosto)
-        tietojen_taytto(laitteet_tiedot_entry, tiedot, laitteen_nimikkeet, laitteen_tekstit)
+        tietojen_taytto(laitetieto_kentta, tiedot, laitteen_avaimet, laitteen_tekstit, montako_valia)
 # -------------------------------------------------------------------
 def laitteet_valikko(laite_combobox, milla_tiedolla):
     """Luo valikot laitetyypeille ja -malleille"""
@@ -66,24 +63,25 @@ def laitteet_valikko(laite_combobox, milla_tiedolla):
     laite_combobox.configure(values = tiedot)
     laite_combobox.set(tiedot[0])
 # -------------------------------------------------------------------
-def laitteet_valikko_event(event, laite_combobox, tieto_nimike, laitteet_tiedot_entry):
+def laitteet_valikko_event(event, laite_combobox, tieto_avain, laitetieto_kentta):
     """Useamman laitteen haku laitetyypin tai laitemallin perusteella"""
 
     tiedosto = "laitetiedot.txt"
 
     mika_tieto = laite_combobox.get()
 
-    tiedot_lista = common.hae_tietoja(mika_tieto, tieto_nimike, tiedosto)
+    tiedot_lista = common.hae_tietoja(mika_tieto, tieto_avain, tiedosto)
 
     laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
-    laitteen_nimikkeet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    laitteen_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    montako_valia = [13, 10, 1, 2, 6]
 
-    tietojen_taytto_useat(laitteet_tiedot_entry, tiedot_lista, laitteen_nimikkeet, laitteen_tekstit, mika_tieto)
+    tietojen_taytto_useat(laitetieto_kentta, tiedot_lista, laitteen_avaimet, laitteen_tekstit, mika_tieto, montako_valia)
 # -------------------------------------------------------------------
-def tietojen_taytto_useat(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mika_tieto):
+def tietojen_taytto_useat(tieto_kentta, tiedot_lista, avaimet, tekstit, mika_tieto, montako_valia):
     """Täyttää tiedot entryyn"""
 
-    tiedot_entry.delete('1.0', tk.END)
+    tieto_kentta.delete('1.0', tk.END)
 
     laskuri = 0
     for tiedot in tiedot_lista:
@@ -91,39 +89,40 @@ def tietojen_taytto_useat(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mika_t
         if laskuri % 2 == 0:
             laskuri += 1
         elif laskuri < len(tiedot_lista) - 1:
-            tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, "\n\n")
+            tietojen_taytto_entryyn(tiedot, tieto_kentta, avaimet, tekstit, mika_tieto, "\n\n", montako_valia)
             laskuri += 1
         else:
-            tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, "")
+            tietojen_taytto_entryyn(tiedot, tieto_kentta, avaimet, tekstit, mika_tieto, "", montako_valia)
 # -------------------------------------------------------------------
-def tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, rivinvaihto):
+def tietojen_taytto_entryyn(tiedot, tieto_kentta, avaimet, tekstit, mika_tieto, rivinvaihto, montako_valia):
     i = 0
+    vali = " "
 
     while i < len(tekstit) - 1:
-        if tiedot[nimikkeet[i]] != mika_tieto:
+        if tiedot[avaimet[i]] != mika_tieto:
             # Sijoitetaan tiedot terminaaliin
-            tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}\n")
+            tieto_kentta.insert(tk.END, f"{tekstit[i]} {vali * montako_valia[i]} {tiedot[avaimet[i]]}\n")
         i += 1
     else:
-        tiedot_entry.insert(tk.END, f"{tekstit[i]} {tiedot[nimikkeet[i]]}{rivinvaihto}")
+        tieto_kentta.insert(tk.END, f"{tekstit[i]} {vali * montako_valia[i]} {tiedot[avaimet[i]]}{rivinvaihto}")
 # -------------------------------------------------------------------
-def tietojen_taytto_useat_id(tiedot_entry, tiedot_lista, nimikkeet, tekstit, mika_tieto, tiketin_id_teksti):
+def tietojen_taytto_useat_id(tieto_kentta, tiedot_lista, avaimet, tekstit, mika_tieto, tiketin_id_teksti, montako_valia):
     """Täyttää tiedot entryyn + tiketin ID"""
 
-    tiedot_entry.delete('1.0', tk.END)
+    tieto_kentta.delete('1.0', tk.END)
 
     laskuri = 0
     for tiedot in tiedot_lista:
         
         if laskuri % 2 == 0:
-            tiedot_entry.insert(tk.END, f"{tiketin_id_teksti} {tiedot}\n")
+            tieto_kentta.insert(tk.END, f"{tiketin_id_teksti} {" "*18} {tiedot}\n")
             laskuri += 1
 
         elif laskuri < len(tiedot_lista) - 1:
-            tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, "\n\n")
+            tietojen_taytto_entryyn(tiedot, tieto_kentta, avaimet, tekstit, mika_tieto, "\n\n", montako_valia)
             laskuri += 1
         else:
-            tietojen_taytto_entryyn(tiedot, tiedot_entry, nimikkeet, tekstit, mika_tieto, "")
+            tietojen_taytto_entryyn(tiedot, tieto_kentta, avaimet, tekstit, mika_tieto, "", montako_valia)
 # -------------------------------------------------------------------
 def tiketit_haku_valmiusaste(valmiusaste_combobox):
     """Valmiusasteiden asetus valikkoon"""
@@ -133,7 +132,7 @@ def tiketit_haku_valmiusaste(valmiusaste_combobox):
     valmiusaste_combobox.configure(values = tiedot)
     valmiusaste_combobox.set(tiedot[0])
 # -------------------------------------------------------------------
-def valmiusaste_valikko_event(event, valmiusaste_combobox, valmiusaste_tikettien_tiedot_entry):
+def valmiusaste_valikko_event(event, valmiusaste_combobox, tikettitieto_kentta):
     """Tikettien tietojen haku valmiusasteen perusteella"""
 
     tiedosto = "tikettitiedot.txt"
@@ -142,13 +141,14 @@ def valmiusaste_valikko_event(event, valmiusaste_combobox, valmiusaste_tikettien
 
     tiketin_id_teksti = "Tiketin ID:"
     tiketin_tekstit = ["Asiakkaan nimi:", "Laitteen sarjanumero:", "Valmiusaste:", "Teknikon nimi:", "Laitteen vika:"]
-    tiketin_nimikkeet = ["asiakas_id", "laite_id", "valmiusaste", "teknikko_id", "vika"]
+    tiketin_avaimet = ["asiakas_nimi", "laite_sarjanumero", "valmiusaste", "teknikko_nimi", "vika"]
+    montako_valia = [9, 1, 0, 11, 13]
 
     tiketin_tiedot_lista = common.hae_tietoja(valittu_valmiusaste, "valmiusaste", tiedosto)
 
     tiedot_lista = asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista)
 
-    tietojen_taytto_useat_id(valmiusaste_tikettien_tiedot_entry, tiedot_lista, tiketin_nimikkeet, tiketin_tekstit, valittu_valmiusaste, tiketin_id_teksti)
+    tietojen_taytto_useat_id(tikettitieto_kentta, tiedot_lista, tiketin_avaimet, tiketin_tekstit, valittu_valmiusaste, tiketin_id_teksti, montako_valia)
 # -------------------------------------------------------------------
 def asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista):
 
@@ -158,10 +158,13 @@ def asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista):
 
         if laskuri % 2 == 0:
             lista.append(tieto)
+            laskuri += 1
 
         else:
-            sanakirja = {}
+            tieto["asiakas_nimi"] = common.hae_tieto_id(tieto["asiakas_id"], "nimi", "asiakastiedot.txt")
+            tieto["laite_sarjanumero"] = common.hae_tieto_id(tieto["laite_id"], "sarjanumero", "laitetiedot.txt")
+            tieto["teknikko_nimi"] = common.hae_tieto_id(tieto["teknikko_id"], "nimi", "teknikkotiedot.txt")
+            laskuri += 1
 
-            asiakkaan_nimi = common.hae_tieto_id(tieto["asiakas_id"], "nimi", "asiakastiedot.txt")
-            laitteen_sarjanumero = common.hae_tieto_id(tieto["laite_id"], "sarjanumero", "laitetiedot.txt")
-
+    print("asiakas_nimet_ja_laite_sarjanumerot - tiketin_tiedot_lista", tiketin_tiedot_lista)
+    return tiketin_tiedot_lista

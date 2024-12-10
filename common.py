@@ -15,11 +15,11 @@ def avaa_tiedosto(tiedosto :str):
                 sanakirja2 = {}
                 # Tiedot riviltä ID:tä lukuunottamatta
                 asiat = rivi[9:].split(";")
-                count = 1
+                laskuri = 1
                 for asia in asiat[::2]:
                     # Kuvaus ja tieto
-                    sanakirja2[asia] = asiat[count].strip()
-                    count += 2
+                    sanakirja2[asia] = asiat[laskuri].strip()
+                    laskuri += 2
                 # rivi[:8] on ID
                 sanakirja[rivi[:8]] = sanakirja2
 
@@ -143,6 +143,7 @@ def hae_tieto_id(annettu_id: str, mika_tieto: str, tiedosto: str):
     for id, tiedot in sanakirja.items():
         if annettu_id == id:
             return tiedot[mika_tieto]
+    return "-"
 # -------------------------------------------------------------------
 def hae_tietoja(mika_tieto, tieto_nimike, tiedosto):
     """Kaikkien täsmäävien tiedot"""

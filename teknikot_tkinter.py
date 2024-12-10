@@ -18,22 +18,22 @@ def teknikon_tiedot(teknikot_frame):
         .grid(column = 1, row = 1, columnspan = 2, \
         padx = [5, 0], pady = [100, 0])
 
-    tiedot_lista = ["Teknikon nimi:", "Teknikon puh.numero:", "Teknikon email-osoite:"]
-    teknikon_nimi = tk.StringVar()
-    teknikon_puh_numero = tk.StringVar()
-    teknikon_email = tk.StringVar()
+    label_tekstit = ["Teknikon nimi:", "Teknikon puh.numero:", "Teknikon email-osoite:"]
+    teknikko_nimi = tk.StringVar()
+    teknikko_puh_numero = tk.StringVar()
+    teknikko_email = tk.StringVar()
 
-    teknikon_nimi_entry = ttk.Entry
-    teknikon_puh_numero_entry = ttk.Entry
-    teknikon_email_entry = ttk.Entry
-    teknikon_tiedot = [teknikon_nimi, teknikon_puh_numero, teknikon_email]
-    teknikon_entryt = [teknikon_nimi_entry, teknikon_puh_numero_entry, teknikon_email_entry]
+    teknikko_nimi_entry = ttk.Entry
+    teknikko_puh_numero_entry = ttk.Entry
+    teknikko_email_entry = ttk.Entry
+    teknikko_muuttujat = [teknikko_nimi, teknikko_puh_numero, teknikko_email]
+    teknikko_entryt = [teknikko_nimi_entry, teknikko_puh_numero_entry, teknikko_email_entry]
 
-    common_tkinter.luo_labelit_ja_entryt(teknikot_frame, tiedot_lista, teknikon_entryt, teknikon_tiedot, 1, 5)
+    common_tkinter.luo_labelit_ja_entryt(teknikot_frame, label_tekstit, teknikko_entryt, teknikko_muuttujat, 1, 5)
 
     # Button tallentaa uuden teknikon tiedot
     ttk.Button(teknikot_frame, text = "Tallenna teknikko", style = "bw2.TButton", \
-        command=lambda:teknikot.uusi_teknikko(teknikon_tiedot)) \
+        command=lambda:teknikot.uusi_teknikko(teknikko_muuttujat)) \
         .grid(column = 1, row = 20, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])
 # -------------------------------------------------------------------
 def valmiusasteen_vaihto(teknikot_frame):
