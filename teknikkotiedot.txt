@@ -1,0 +1,2 @@
+te-00000;nimi;Tete Teknikko;puh.numero;050-3030;email;tete@gmail.com
+te-00001;nimi;Tete Teknikko2;puh.numero;050-3032;email;tete2@gmail.com

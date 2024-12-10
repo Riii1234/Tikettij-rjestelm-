@@ -1,0 +1,6 @@
+ti-00000;asiakas_id;as-00000;laite_id;la-00000;valmiusaste;Vastaanotettu;teknikko_id;;vika;Näyttö rikki
+ti-00001;asiakas_id;as-00001;laite_id;la-00001;valmiusaste;Työnalla;teknikko_id;te-00001;vika;Näyttö rikki
+ti-00002;asiakas_id;as-00001;laite_id;la-00002;valmiusaste;Vastaanotettu;teknikko_id;;vika;Näyttö rikki
+ti-00003;asiakas_id;as-00002;laite_id;la-00003;valmiusaste;Valmis;teknikko_id;te-00001;vika;Näyttö rikki
+ti-00004;asiakas_id;as-00000;laite_id;la-00000;valmiusaste;Valmis;teknikko_id;te-00001;vika;Näyttö rikki
+ti-00005;asiakas_id;as-00000;laite_id;la-00004;valmiusaste;Valmis;teknikko_id;te-00000;vika;Näyttö rikki
