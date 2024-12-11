@@ -2,72 +2,67 @@ import tkinter as tk
 import common
 # -------------------------------------------------------------------
 def hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta):
-    """Asiakkaan tietojen haku ID:n, nimen tai emailin perusteella"""
+    """Hakee asiakkaan nimen tai emailin valinnan ja luo tarvittavat tiedot"""
 
-    asiakas_nimi = asiakas_entryt[0].get()
-    asiakas_email = asiakas_entryt[1].get()
+    asiakas_nimi_valinta = asiakas_entryt[0].get()
+    asiakas_email_valinta = asiakas_entryt[1].get()
 
     asiakas_tekstit = ["Nimi:", "Osoite:", "Puh.numero:", "Email:"]
     asiakas_avaimet = ["nimi", "osoite", "puh.numero", "email"]
     valilyonti_maarat = [12, 9, 1, 11]
 
-    if asiakas_nimi != "":
+    if asiakas_nimi_valinta != "":
+        hae_tiedot_ja_tayta_tekstikentta(asiakas_nimi_valinta, "nimi", "asiakastiedot.txt", asiakas_tekstikentta, asiakas_avaimet, asiakas_tekstit, valilyonti_maarat)
 
-        tiedot = common.hae_tiedot(asiakas_nimi, "nimi", "asiakastiedot.txt")
-        tietojen_taytto(asiakas_tekstikentta, tiedot, asiakas_avaimet, asiakas_tekstit, valilyonti_maarat)
-
-    elif asiakas_email != "":
-
-        tiedot = common.hae_tiedot(asiakas_email, "email", "asiakastiedot.txt")
-        tietojen_taytto(asiakas_tekstikentta, tiedot, asiakas_avaimet, asiakas_tekstit, valilyonti_maarat)
-# -------------------------------------------------------------------
-def tietojen_taytto(tekstikentta, tiedot, avaimet, tekstit, valilyonti_maarat):
-
-    tekstikentta.delete('1.0', tk.END)
-
-    i = 0
-    while i < len(tekstit):
-        if i < len(tekstit) - 1:
-            # Sijoitetaan tiedot terminaaliin
-            tekstikentta.insert(tk.END, f"{tekstit[i]} {" " * valilyonti_maarat[i]} {tiedot[avaimet[i]]}\n")
-        else:
-            tekstikentta.insert(tk.END, f"{tekstit[i]} {" " * valilyonti_maarat[i]} {tiedot[avaimet[i]]}")
-        i += 1
+    elif asiakas_email_valinta != "":
+        hae_tiedot_ja_tayta_tekstikentta(asiakas_email_valinta, "email", "asiakastiedot.txt", asiakas_tekstikentta, asiakas_avaimet, asiakas_tekstit, valilyonti_maarat)
 # -------------------------------------------------------------------
 def hae_laite_tiedot(laite_sarjanumero_entry, laite_tekstikentta):
-    """Laitteen tietojen haku ID:n tai sarjanumeron perusteella"""
+    """Hakee laitteen sarjanumeron valinnan ja luo tarvittavat tiedot"""
 
-    tiedosto = "laitetiedot.txt"
+    laite_sarjanumero_valinta = laite_sarjanumero_entry.get()
 
-    laite_sarjanumero = laite_sarjanumero_entry.get()
+    laite_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
+    laite_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    valilyonti_maarat = [13, 10, 1, 2, 6]
 
-    laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
-    laitteen_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
-    montako_valia = [13, 10, 1, 2, 6]
+    if laite_sarjanumero_valinta != "":
+        hae_tiedot_ja_tayta_tekstikentta(laite_sarjanumero_valinta, "sarjanumero", "laitetiedot.txt", laite_tekstikentta, laite_avaimet, laite_tekstit, valilyonti_maarat)
+# -------------------------------------------------------------------
+def hae_tiedot_ja_tayta_tekstikentta(valinta, avain, tiedosto, tekstikentta, avaimet, tekstit, valilyonti_maarat):
+    """Hakee tiedot sanakirjaan ja täyttää ne tekstikenttään"""
 
-    if laite_sarjanumero != "":
-
-        tiedot = common.hae_tiedot(laite_sarjanumero, "sarjanumero", tiedosto)
-        tietojen_taytto(laite_tekstikentta, tiedot, laitteen_avaimet, laitteen_tekstit, montako_valia)
+    tiedot_sanakirja = common.hae_tiedot(valinta, avain, tiedosto, "tieto")
+    if tiedot_sanakirja != "":
+        
+        tekstikentta.delete('1.0', tk.END)
+        i = 0
+        while i < len(tekstit):
+            if i < len(tekstit) - 1:
+                # Sijoitetaan tiedot terminaaliin
+                tekstikentta.insert(tk.END, f"{tekstit[i]} {" " * valilyonti_maarat[i]} {tiedot_sanakirja[avaimet[i]]}\n")
+            else:
+                tekstikentta.insert(tk.END, f"{tekstit[i]} {" " * valilyonti_maarat[i]} {tiedot_sanakirja[avaimet[i]]}")
+            i += 1
 # -------------------------------------------------------------------
 def aseta_laite_valikko_tiedot(laite_valikko, valikko_avain):
     """Hakee ja täyttää laite-valikon tiedoilla"""
 
-    tiedot = common.hae_tiedot_kaikkien_erit(valikko_avain, "laitetiedot.txt")
+    tiedot = common.hae_tiedot_useita(valikko_avain, "laitetiedot.txt", "erilaiset", [])
     common.aseta_valikko(laite_valikko, tiedot)
 # -------------------------------------------------------------------
 def luo_laite_valikko_event(event, laite_valikko, valikko_avain, laite_tekstikentta):
     """Täyttää tekstikentän, kun valikon valintaa vaihdetaan"""
 
-    valinta = laite_valikko.get()
+    laite_valinta = laite_valikko.get()
 
-    tiedot_lista = common.hae_tietoja(valinta, valikko_avain, "laitetiedot.txt")
+    tiedot_lista = common.hae_tietoja(laite_valinta, valikko_avain, "laitetiedot.txt")
 
     laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
     laitteen_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
     valilyonti_maarat = [13, 10, 1, 2, 6]
 
-    tietojen_taytto_useat(laite_tekstikentta, tiedot_lista, laitteen_avaimet, laitteen_tekstit, valinta, valilyonti_maarat)
+    tietojen_taytto_useat(laite_tekstikentta, tiedot_lista, laitteen_avaimet, laitteen_tekstit, laite_valinta, valilyonti_maarat)
 # -------------------------------------------------------------------
 def tietojen_taytto_useat(tekstikentta, tiedot_lista, avaimet, tekstit, valinta, valilyonti_maarat):
     """Täyttää tiedot entryyn"""
@@ -119,8 +114,7 @@ def tiketit_haku_valmiusaste(valmiusaste_valikko):
 
     tiedot = ["Vastaanotettu", "Työnalla", "Valmis"]
 
-    valmiusaste_valikko.configure(values = tiedot)
-    valmiusaste_valikko.set(tiedot[0])
+    common.aseta_valikko(valmiusaste_valikko, tiedot)
 # -------------------------------------------------------------------
 def valmiusaste_valikko_event(event, valmiusaste_valikko, tiketti_tekstikentta):
     """Tikettien tietojen haku valmiusasteen perusteella"""

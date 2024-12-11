@@ -21,13 +21,13 @@ def luo_asiakastieto_haku(haku_frame):
 
     label_tekstit = ["Asiakkaan nimi:", "tai Asiakkaan email-osoite:"]
 
-    asiakas_nimi = tk.StringVar()
-    asiakas_email = tk.StringVar()
-    asiakas_muuttujat = [asiakas_nimi, asiakas_email]
-
     asiakas_nimi_entry = ttk.Entry
     asiakas_email_entry = ttk.Entry
     asiakas_entryt = [asiakas_nimi_entry, asiakas_email_entry]
+
+    asiakas_nimi = tk.StringVar()
+    asiakas_email = tk.StringVar()
+    asiakas_muuttujat = [asiakas_nimi, asiakas_email]
 
     # luo_labelit_ja_entryt(frame, label_tekstit, entryt, muuttujat, pystyrivi, vaakarivi)
     common_tkinter.luo_labelit_ja_entryt(haku_frame, label_tekstit, asiakas_entryt, asiakas_muuttujat, 1, 3)
@@ -37,12 +37,11 @@ def luo_asiakastieto_haku(haku_frame):
     common_tkinter.luo_button(haku_frame, "Hae asiakkaan tiedot", lambda:haku.hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta), 1, 16)
 # -------------------------------------------------------------------
 def luo_laitetieto_haku(haku_frame):
-    """Laitteen tietojen haku laitteen ID:n tai sarjanumeron perusteella"""
-
-    laite_sarjanumero = tk.StringVar()
+    """Luo widgetit laitteen tietojen hakuun laitteen sarjanumerolla"""
 
     common_tkinter.luo_label(haku_frame, "Laitteen sarjanumero:", "white.TLabel", 10, 3, 10, 6)
 
+    laite_sarjanumero = tk.StringVar()
     laite_sarjanumero_entry = common_tkinter.luo_entry(haku_frame, laite_sarjanumero, 10, 4, 10, 2)
 
     laite_tyyppi_valikko = common_tkinter.luo_valikko(haku_frame, "Laitetyypit", 10, 7)

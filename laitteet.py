@@ -80,13 +80,12 @@ def vanhat_laitteet(asiakkaan_tiedot):
 
     return haettavat_laitteet
 # -------------------------------------------------------------------
-def vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_combobox):
+def vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_valikko):
     """Asettaa asiakkaan vanhat laitteet valikkoon"""
 
     laitteet_lista = vanhat_laite_mallit(asiakkaan_tiedot)
-    
-    vanhat_laitteet_combobox.configure(values = laitteet_lista)
-    vanhat_laitteet_combobox.set(laitteet_lista[0])
+
+    common.aseta_valikko(vanhat_laitteet_valikko, laitteet_lista)
 # -------------------------------------------------------------------
 def vanhat_laite_mallit(asiakkaan_tiedot):
     """Hakee laitteiden mallit"""

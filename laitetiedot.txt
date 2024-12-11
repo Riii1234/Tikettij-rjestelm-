@@ -3,3 +3,4 @@ la-00001;malli;Samsung Galaxy2;tyyppi;kännykkä2;sarjanumero;3513552;tuotetunnus;
 la-00002;malli;Samsung Galaxy3;tyyppi;kännykkä;sarjanumero;3513553;tuotetunnus;xx3333;lisa;Jotain jotain
 la-00003;malli;Samsung Galaxy;tyyppi;kännykkä;sarjanumero;3513554;tuotetunnus;xx3334;lisa;Jotain jotain
 la-00004;malli;Samsung Galaxy5;tyyppi;kännykkä3;sarjanumero;3513555;tuotetunnus;xx3335;lisa;Jotain jotain
+la-00005;malli;iphone;tyyppi;xs;sarjanumero;23423342;tuotetunnus;23423432;lisa;

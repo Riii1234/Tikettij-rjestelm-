@@ -34,7 +34,7 @@ def vanha_asiakas(asiakkaan_tiedot, asiakkaan_entryt, vanhat_laitteet_combobox):
     if asiakas_id == "":
         return
     else:
-        tiedot = common.hae_tiedot_id(asiakas_id, "asiakastiedot.txt")
+        tiedot = common.hae_tiedot(asiakas_id, "", "asiakastiedot.txt", "id")
         globals.onko_uusi_asiakas = False
 
         lista = ["nimi", "osoite", "puh.numero", "email"]

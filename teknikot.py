@@ -31,8 +31,7 @@ def asiakkaat_valikko_nimet(asiakkaat_combobox):
 
     asiakkaat_nimet = hae_mahdolliset_asiakkaat()
 
-    asiakkaat_combobox.configure(values = asiakkaat_nimet)
-    asiakkaat_combobox.set(asiakkaat_nimet[0])
+    common.aseta_valikko(asiakkaat_combobox, asiakkaat_nimet)
 # -------------------------------------------------------------------
 def hae_mahdolliset_asiakkaat():
     """Haetaan asiakkaiden nimet"""
@@ -88,7 +87,7 @@ def laitteen_valinta(asiakkaat_combobox):
             if tiedot["valmiusaste"] != "Valmis":
                 haettavat_laitteet_idt.append(tiedot["laite_id"])
 
-    haettavat_laitteet_mallit = common.hae_mahd_tieto_kaikki(haettavat_laitteet_idt, "malli", "laitetiedot.txt")
+    haettavat_laitteet_mallit = common.hae_tiedot_useita("malli", "laitetiedot.txt", "id_lista", haettavat_laitteet_idt)
 
     return [haettavat_laitteet_idt, haettavat_laitteet_mallit]
 # -------------------------------------------------------------------
@@ -96,8 +95,6 @@ def vaihda_valittua_tikettia(teknikot_frame, asiakkaat_combobox, laitteet_combob
     """Hakee tiketin ID:n ja näyttää sen terminaalissa"""
 
     tiketti_id_ja_teknikko_id = hae_idt_valinnoilla(asiakkaat_combobox, laitteet_combobox, laitteet_idt_ja_mallit)
-
-    common_tkinter.tee_label_teksti(teknikot_frame, f" Tiketin ID: {tiketti_id_ja_teknikko_id[0]} ", 500, 390)
 
     return tiketti_id_ja_teknikko_id
 # -------------------------------------------------------------------
@@ -147,16 +144,14 @@ def laitteet_valikko_event(event, teknikot_frame, asiakkaat_combobox, laitteet_c
     else:
         teknikot_combobox["state"] = "readonly"
 
-    valmiusasteet_combobox.configure(values = valmiusasteet_lista)
-    valmiusasteet_combobox.set(valmiusasteet_lista[0])
+    common.aseta_valikko(valmiusasteet_combobox, valmiusasteet_lista)
 # -------------------------------------------------------------------
 def teknikot_valikko_nimet(teknikot_combobox):
     """Täytetään teknikkojen nimet valikkoon"""
 
-    teknikot_nimet = common.hae_tiedot_kaikkien("nimi", "teknikkotiedot.txt")
+    teknikot_nimet = common.hae_tiedot_useita("nimi", "teknikkotiedot.txt", "kaikki", [])
 
-    teknikot_combobox.configure(values = teknikot_nimet)
-    teknikot_combobox.set(teknikot_nimet[0])
+    common.aseta_valikko(teknikot_combobox, teknikot_nimet)
 # -------------------------------------------------------------------
 def tallenna_tiketti(asiakkaat_combobox, laitteet_combobox, valmiusasteet_combobox, teknikot_combobox):
 

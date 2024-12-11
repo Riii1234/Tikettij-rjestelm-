@@ -51,6 +51,7 @@ def luo_teksti_kentta(frame, pystyrivi, vaakarivi, korkeus):
     return tekstikentta
 # -------------------------------------------------------------------
 def luo_valikko(frame, teksti, pystyrivi, vaakarivi):
+    """Luo teksti-labelin valikolle ja valikon"""
     
     ttk.Label(frame, text = teksti, style = "white.TLabel") \
         .grid(column = pystyrivi, row = vaakarivi, columnspan = 2, sticky = tk.W, padx = [0, 0], pady = [0, 0])
@@ -63,6 +64,7 @@ def luo_valikko(frame, teksti, pystyrivi, vaakarivi):
     return valikko
 # -------------------------------------------------------------------
 def luo_button(frame, teksti, funktio, pystyrivi, vaakarivi):
+    """Luo buttonin"""
 
     ttk.Button(frame, text = teksti, style = "bw.TButton", command=funktio) \
         .grid(column = pystyrivi, row = vaakarivi, columnspan = 2, sticky = tk.W, padx = [5, 0], pady = [10, 10])

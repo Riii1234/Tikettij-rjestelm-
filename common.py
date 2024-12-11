@@ -72,57 +72,40 @@ def tallenna_tiedosto(sanakirja: dict, tiedosto: str):
                 rivi = rivi[:-1]
                 tied.write(rivi + "\n")
 # -------------------------------------------------------------------
-def hae_tiedot_id(annettu_id: str, tiedosto: str):
-    """Yhden ID:n tietojen haku tiedostosta"""
+def hae_tiedot(id_tai_tieto: str, avain: str, tiedosto: str, haku_valinta):
+    """Hakee ID:n tai valitun tiedon kaikki tiedot"""
 
     sanakirja = avaa_tiedosto(tiedosto)
-
     # ID on sanakirjan avain ja tiedot ovat sanakirjana
     for id, tiedot in sanakirja.items():
-        if annettu_id == id:
-            return tiedot
+
+        if haku_valinta == "id":
+            if id_tai_tieto == id:
+                return tiedot
+
+        elif haku_valinta == "tieto":
+            if tiedot[avain] == id_tai_tieto:
+                return tiedot
+    return ""
 # ------------------------------------------------------------------- 
-def hae_tiedot(annettu_tieto: str, milla_tiedolla: str, tiedosto: str):
-    """Yhden tiedon tietojen haku"""
-
-    sanakirja = avaa_tiedosto(tiedosto)
-
-    for id, tiedot in sanakirja.items():
-        if tiedot[milla_tiedolla] == annettu_tieto:
-            return tiedot
-# ------------------------------------------------------------------- 
-def hae_tiedot_kaikkien(milla_tiedolla: str, tiedosto: str):
-    """Kaikkien tietojen haku tiedolla (ei ID)"""
+def hae_tiedot_useita(avain: str, tiedosto: str, haku_valinta: str, id_lista: list):
+    """Hakee avaimen kaikki tiedot"""
 
     sanakirja = avaa_tiedosto(tiedosto)
     lista = []
 
     for id, tiedot in sanakirja.items():
-        lista.append(tiedot[milla_tiedolla])
+        
+        if haku_valinta == "kaikki":
+            lista.append(tiedot[avain])
 
-    return lista
-# -------------------------------------------------------------------
-def hae_tiedot_kaikkien_erit(milla_tiedolla: str, tiedosto: str):
-    """Kaikkien tietojen haku tiedolla (ei ID), vain yksilölliset tiedot"""
+        elif haku_valinta == "erilaiset":
+            if tiedot[avain] not in lista:
+                lista.append(tiedot[avain])
 
-    sanakirja = avaa_tiedosto(tiedosto)
-    lista = []
-
-    for id, tiedot in sanakirja.items():
-        if tiedot[milla_tiedolla] not in lista:
-            lista.append(tiedot[milla_tiedolla])
-
-    return lista
-# -------------------------------------------------------------------
-def hae_mahd_tieto_kaikki(idt: list, mika_tieto: str, tiedosto: str):
-    """Useamman ID:n yhden tiedon haku ID:eillä (Jos id täsmää)"""
-
-    sanakirja = avaa_tiedosto(tiedosto)
-    lista = []
-
-    for id, tiedot in sanakirja.items():
-        if id in idt:
-            lista.append(tiedot[mika_tieto])
+        elif haku_valinta == "id_lista":
+            if id in id_lista:
+                lista.append(tiedot[avain])
 
     return lista
 # -------------------------------------------------------------------
@@ -156,8 +139,6 @@ def hae_tietoja(mika_tieto, tieto_nimike, tiedosto):
         if tiedot[tieto_nimike] == mika_tieto:
             lista.append(id)
             lista.append(tiedot)
-
-    print("hae_tietoja - lista", lista)
 
     return lista
 # -------------------------------------------------------------------
