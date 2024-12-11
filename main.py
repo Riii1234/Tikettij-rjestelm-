@@ -1,6 +1,6 @@
 import terminal
 # -------------------------------------------------------------------
-root = terminal.terminaalin_aloitus()
+root = terminal.aloita_terminaali()
 
-terminal.terminaalin_sisalto(root)
+terminal.luo_terminaalin_sisalto(root)
 

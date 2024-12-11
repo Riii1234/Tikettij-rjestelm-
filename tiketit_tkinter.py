@@ -5,7 +5,7 @@ from tiketit import uusi_tiketti, tietojen_tallennus
 from asiakkaat import vanha_asiakas
 from laitteet import vanha_laite_valikko, vanhat_laitteet_nappi
 # -------------------------------------------------------------------
-def tiketti_valilehti(tiketti_frame):
+def luo_tiketti_toiminnot(tiketti_frame):
     """Tiketin luonti, ottaa vastaan tiketti_framen"""
 
     tiketti_id = luo_tiketin_id(tiketti_frame)

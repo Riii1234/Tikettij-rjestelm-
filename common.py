@@ -199,3 +199,9 @@ def lue_tiedot(tiedot):
 
     return tiedot_lista
 # -------------------------------------------------------------------
+def aseta_valikko(valikko, tiedot):
+    """Asettaa tiedot valikkoon"""
+
+    valikko.configure(values = tiedot)
+    valikko.set(tiedot[0])
+# -------------------------------------------------------------------

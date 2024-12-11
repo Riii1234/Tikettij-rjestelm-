@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 # -------------------------------------------------------------------
-def terminaalin_aloitus():
+def aloita_terminaali():
     """Käynnistää terminaalin ja luo tyylit widgeteille"""
     root = tk.Tk()
     root.title("Tikettijärjestelmä")
@@ -30,28 +30,30 @@ def terminaalin_aloitus():
     return root
 # -------------------------------------------------------------------
 from common_tkinter import luo_frame
-from tiketit_tkinter import tiketti_valilehti
-from haku_tkinter import haku_valilehti
-from teknikot_tkinter import teknikot_valilehti
+from tiketit_tkinter import luo_tiketti_toiminnot
+from haku_tkinter import luo_haku_toiminnot
+from teknikot_tkinter import luo_teknikko_toiminnot
 # -------------------------------------------------------------------
-def terminaalin_sisalto(root):
+def luo_terminaalin_sisalto(root):
+    """Luo välilehdet ja niiden sisällön"""
+
     # Luo framet eli välilehdet
     etusivu_frame = luo_frame(root)
     tiketti_frame = luo_frame(root)
     haku_frame = luo_frame(root)
-    teknikot_frame = luo_frame(root)
+    teknikko_frame = luo_frame(root)
 
     # Luo buttonit välilehtien vaihtamiseksi
-    buttons(etusivu_frame, tiketti_frame, haku_frame, teknikot_frame)
-    buttons(tiketti_frame, tiketti_frame, haku_frame, teknikot_frame)
-    buttons(haku_frame, tiketti_frame, haku_frame, teknikot_frame)
-    buttons(teknikot_frame, tiketti_frame, haku_frame, teknikot_frame)
+    luo_buttons(etusivu_frame, tiketti_frame, haku_frame, teknikko_frame)
+    luo_buttons(tiketti_frame, tiketti_frame, haku_frame, teknikko_frame)
+    luo_buttons(haku_frame, tiketti_frame, haku_frame, teknikko_frame)
+    luo_buttons(teknikko_frame, tiketti_frame, haku_frame, teknikko_frame)
 
     # Funktiot välilehdillä oleville asioille
-    etusivu_valilehti(etusivu_frame)
-    tiketti_valilehti(tiketti_frame)
-    haku_valilehti(haku_frame)
-    teknikot_valilehti(teknikot_frame)
+    luo_etusivu_otsikko(etusivu_frame)
+    luo_tiketti_toiminnot(tiketti_frame)
+    luo_haku_toiminnot(haku_frame)
+    luo_teknikko_toiminnot(teknikko_frame)
 
     # Aloitus-frame
     etusivu_frame.tkraise()
@@ -59,8 +61,9 @@ def terminaalin_sisalto(root):
     # Ohjelman aloitus
     root.mainloop()
 # -------------------------------------------------------------------
-def buttons(frame, tiketti_frame, haku_frame, teknikot_frame):
-    """Luo välilehtien button-widgetit"""
+def luo_buttons(frame, tiketti_frame, haku_frame, teknikko_frame):
+    """Luo välilehtien vaihtamiseen button-widgetit"""
+
     b1 = ttk.Button(frame, text = "Luo uusi tiketti", style = "bw.TButton",  \
         command = lambda:tiketti_frame.tkraise())
     b1.place(x = 1, y = 1, anchor = tk.NW)
@@ -70,13 +73,12 @@ def buttons(frame, tiketti_frame, haku_frame, teknikot_frame):
     b2.place(x = 110, y = 1, anchor = tk.NW)
 
     b2 = ttk.Button(frame, text = "Teknikot", style = "bw.TButton",  \
-        command = lambda:teknikot_frame.tkraise())
+        command = lambda:teknikko_frame.tkraise())
     b2.place(x = 199, y = 1, anchor = tk.NW)
 # -------------------------------------------------------------------
-def etusivu_valilehti(etusivu_frame):
+def luo_etusivu_otsikko(etusivu_frame):
     """Luo otsikon etusivulle"""
 
     otsikko = tk.Label(etusivu_frame, text = "Tikettijärjestelmä", foreground = "white", background = "#202020", font = ("Helvetica", 30))
-
     otsikko.grid(column = 0, row = 0)
-# ------------------------------------------------------------------- 
+# -------------------------------------------------------------------
