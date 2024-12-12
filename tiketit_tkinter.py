@@ -25,14 +25,14 @@ def luo_tiketin_id(tiketti_frame):
     tiketti_id = uusi_tiketti()
 
     # tee_label(frame, teksti, tyyli, pystyrivi, vaakarivi, x_vasen, x_oikea, y_ylä, y_ala)
-    common_tkinter.luo_label(tiketti_frame, f" Tiketin ID: {tiketti_id} ", "white2.TLabel", 0, 1, 100, 0, 50, 10)
+    common_tkinter.luo_label(tiketti_frame, f" Tiketin ID: {tiketti_id} ", "white2.TLabel", 0, 1, 10, 0, 50, 22)
 
     return tiketti_id
 # -------------------------------------------------------------------
 def laitteet_valikko(tiketti_frame):
     """Valikko asiakkaan vanhoista laitteista"""
 
-    vanhat_laitteet_valikko = common_tkinter.luo_valikko(tiketti_frame, "Vanhat laitteet", 10, 3)
+    vanhat_laitteet_valikko = common_tkinter.luo_valikko(tiketti_frame, "Vanhat laitteet", 10, 3, 10)
 
     return vanhat_laitteet_valikko
 # -------------------------------------------------------------------

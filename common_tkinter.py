@@ -51,15 +51,15 @@ def luo_teksti_kentta(frame, pystyrivi, vaakarivi, korkeus, x_vasen, x_oikea):
 
     return tekstikentta
 # -------------------------------------------------------------------
-def luo_valikko(frame, teksti, pystyrivi, vaakarivi):
+def luo_valikko(frame, teksti, pystyrivi, vaakarivi, x_vasen):
     """Luo teksti-labelin valikolle ja valikon"""
 
-    luo_label(frame, teksti, "white.TLabel", pystyrivi, vaakarivi, 10, 0, 6, 0)
+    luo_label(frame, teksti, "white.TLabel", pystyrivi, vaakarivi, x_vasen, 0, 6, 0)
 
     teksti_muuttuja = tk.StringVar()
     
     valikko = ttk.Combobox(frame, textvariable = teksti_muuttuja, state = "readonly", width = 20, style = "bw.TCombobox")
-    valikko.grid(column = pystyrivi, row = vaakarivi + 1, columnspan = 4, sticky = tk.W, padx = [10, 0], pady = [4, 10])
+    valikko.grid(column = pystyrivi, row = vaakarivi + 1, columnspan = 4, sticky = tk.W, padx = [x_vasen, 0], pady = [4, 10])
 
     return valikko
 # -------------------------------------------------------------------

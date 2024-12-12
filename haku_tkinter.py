@@ -46,8 +46,8 @@ def luo_laitetieto_haku(haku_frame):
     # luo_entry(frame, teksti_muuttuja, pystyrivi, vaakarivi, x_vasen, x_oikea, y_ylä, y_ala)
     laite_sarjanumero_entry = common_tkinter.luo_entry(haku_frame, laite_sarjanumero, 10, 4, 10, 10, 4, 10)
 
-    laite_tyyppi_valikko = common_tkinter.luo_valikko(haku_frame, "Laitetyypit", 10, 11)
-    laite_malli_valikko = common_tkinter.luo_valikko(haku_frame, "Laitemallit", 10, 13)
+    laite_tyyppi_valikko = common_tkinter.luo_valikko(haku_frame, "Laitetyypit", 10, 11, 10)
+    laite_malli_valikko = common_tkinter.luo_valikko(haku_frame, "Laitemallit", 10, 13, 10)
 
     haku.aseta_laite_valikko_tiedot(laite_tyyppi_valikko, "tyyppi")
     haku.aseta_laite_valikko_tiedot(laite_malli_valikko, "malli")
@@ -63,7 +63,7 @@ def luo_laitetieto_haku(haku_frame):
 def luo_valmiusaste_haku(haku_frame):
     """Tikettien tietojen haku valmiusasteella"""
 
-    valmiusaste_valikko = common_tkinter.luo_valikko(haku_frame, "Tiketin valmiusaste", 20, 3)
+    valmiusaste_valikko = common_tkinter.luo_valikko(haku_frame, "Tiketin valmiusaste", 20, 3, 10)
 
     haku.tiketit_haku_valmiusaste(valmiusaste_valikko)
 

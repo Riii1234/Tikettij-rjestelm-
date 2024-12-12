@@ -57,8 +57,7 @@ def tietojen_tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muutt
     
         # Tallentaa tiketin tiedot tiedostoon
         common.tallenna_tiedostoon(tiketit_sanakirja, tiketti_id, tiedosto)
-        #common_tkinter.luo_label(tiketti_frame, "Tiedot tallennettu!", tyyli, pystyrivi, vaakarivi, x, y)
-        #tee_label_teksti(tiketti_frame, "Tiedot tallennettu!", 345, 550)
+        common_tkinter.luo_label(tiketti_frame, "Tiedot tallennettu!", "white.TLabel", 10, 24, 10, 10, 10, 10)
         print("tietojen_tallennus onnistui")
 # -------------------------------------------------------------------
 def luo_tai_hae_id(onko_uusi, uusi_funtio, tiedot_lista, tiedot, tiketin_tiedot_lista, tiedosto, nimike):
