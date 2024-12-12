@@ -40,7 +40,7 @@ def luo_labelit_ja_entryt(frame, label_tekstit, entryt, muuttujat, pystyrivi, va
         entryt[i] = luo_entry(frame, muuttujat[i], pystyrivi, vaakarivi_laskuri + 1, 10, 4)
 
         i += 1
-        vaakarivi_laskuri += 2
+        vaakarivi_laskuri += 4
 # -------------------------------------------------------------------
 def luo_teksti_kentta(frame, pystyrivi, vaakarivi, korkeus):
     """Luo monirivisen teksti-kentän"""
@@ -58,13 +58,13 @@ def luo_valikko(frame, teksti, pystyrivi, vaakarivi):
     teksti_muuttuja = tk.StringVar()
     
     valikko = ttk.Combobox(frame, textvariable = teksti_muuttuja, state = "readonly", width = 20, style = "bw.TCombobox")
-    valikko.grid(column = pystyrivi, row = vaakarivi + 1, columnspan = 4, sticky = tk.W, padx = [10, 0], pady = [4, 0])
+    valikko.grid(column = pystyrivi, row = vaakarivi + 1, columnspan = 4, sticky = tk.W, padx = [10, 0], pady = [4, 6])
 
     return valikko
 # -------------------------------------------------------------------
-def luo_button(frame, teksti, funktio, pystyrivi, vaakarivi):
+def luo_button(frame, teksti, funktio, pystyrivi, vaakarivi, y2):
     """Luo buttonin"""
 
     ttk.Button(frame, text = teksti, style = "bw.TButton", command=funktio) \
-        .grid(column = pystyrivi, row = vaakarivi, columnspan = 2, sticky = tk.W, padx = [10, 0], pady = [10, 10])
+        .grid(column = pystyrivi, row = vaakarivi, columnspan = 2, rowspan = 2, sticky = tk.W, padx = [10, 0], pady = [10, y2])
 # -------------------------------------------------------------------

@@ -30,11 +30,11 @@ def luo_asiakastieto_haku(haku_frame):
     asiakas_muuttujat = [asiakas_nimi, asiakas_email]
 
     # luo_labelit_ja_entryt(frame, label_tekstit, entryt, muuttujat, pystyrivi, vaakarivi)
-    common_tkinter.luo_labelit_ja_entryt(haku_frame, label_tekstit, asiakas_entryt, asiakas_muuttujat, 1, 3)
+    common_tkinter.luo_labelit_ja_entryt(haku_frame, label_tekstit, asiakas_entryt, asiakas_muuttujat, 0, 3)
 
-    asiakas_tekstikentta = common_tkinter.luo_teksti_kentta(haku_frame, 1, 20, 16)
+    asiakas_tekstikentta = common_tkinter.luo_teksti_kentta(haku_frame, 0, 20, 16)
 
-    common_tkinter.luo_button(haku_frame, "Hae asiakkaan tiedot", lambda:haku.hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta), 1, 7)
+    common_tkinter.luo_button(haku_frame, "Hae asiakkaan tiedot", lambda:haku.hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta), 0, 9, 10)
 # -------------------------------------------------------------------
 def luo_laitetieto_haku(haku_frame):
     """Luo widgetit laitteen tietojen hakuun laitteen sarjanumerolla"""
@@ -44,15 +44,15 @@ def luo_laitetieto_haku(haku_frame):
     laite_sarjanumero = tk.StringVar()
     laite_sarjanumero_entry = common_tkinter.luo_entry(haku_frame, laite_sarjanumero, 10, 4, 10, 2)
 
-    laite_tyyppi_valikko = common_tkinter.luo_valikko(haku_frame, "Laitetyypit", 10, 7)
-    laite_malli_valikko = common_tkinter.luo_valikko(haku_frame, "Laitemallit", 10, 9)
+    laite_tyyppi_valikko = common_tkinter.luo_valikko(haku_frame, "Laitetyypit", 10, 10)
+    laite_malli_valikko = common_tkinter.luo_valikko(haku_frame, "Laitemallit", 10, 12)
 
     haku.aseta_laite_valikko_tiedot(laite_tyyppi_valikko, "tyyppi")
     haku.aseta_laite_valikko_tiedot(laite_malli_valikko, "malli")
 
     laite_tekstikentta = common_tkinter.luo_teksti_kentta(haku_frame, 10, 20, 16)
 
-    common_tkinter.luo_button(haku_frame, "Hae laitteen tiedot", lambda:haku.hae_laite_tiedot(laite_sarjanumero_entry, laite_tekstikentta), 10, 5)
+    common_tkinter.luo_button(haku_frame, "Hae laitteen tiedot", lambda:haku.hae_laite_tiedot(laite_sarjanumero_entry, laite_tekstikentta), 10, 7, 10)
 
     laite_tyyppi_valikko.bind("<<ComboboxSelected>>", lambda event: haku.luo_laite_valikko_event(event, laite_tyyppi_valikko, "tyyppi", laite_tekstikentta))
     laite_malli_valikko.bind("<<ComboboxSelected>>", lambda event: haku.luo_laite_valikko_event(event, laite_malli_valikko, "malli", laite_tekstikentta))

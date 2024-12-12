@@ -29,29 +29,29 @@ def teknikon_tiedot(teknikko_frame):
     teknikko_email = tk.StringVar()
     teknikko_muuttujat = [teknikko_nimi, teknikko_puh_numero, teknikko_email]
     
-    common_tkinter.luo_labelit_ja_entryt(teknikko_frame, label_tekstit, teknikko_entryt, teknikko_muuttujat, 1, 5)
+    common_tkinter.luo_labelit_ja_entryt(teknikko_frame, label_tekstit, teknikko_entryt, teknikko_muuttujat, 0, 3)
 
     # Button tallentaa uuden teknikon tiedot
-    common_tkinter.luo_button(teknikko_frame, "Tallenna teknikko", lambda:teknikot.uusi_teknikko(teknikko_muuttujat), 1, 20)
+    common_tkinter.luo_button(teknikko_frame, "Tallenna teknikko", lambda:teknikot.uusi_teknikko(teknikko_muuttujat), 0, 20, 200)
 # -------------------------------------------------------------------
 def valmiusasteen_vaihto(teknikko_frame):
     """Valikot tiketin valitsemiseen ja tiketin valmiusasteen vaihtamiseksi"""
 
     common_tkinter.luo_label(teknikko_frame, "Vaihda tiketin valmiusastetta", "white2.TLabel", 10, 1, 10, 50, 10)
 
-    asiakkaat_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse asiakas", 10, 6)
+    asiakkaat_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse asiakas", 10, 3)
     asiakkaat_valikko.bind("<<ComboboxSelected>>", lambda event: teknikot.laitteet_valikko_mallit(event, teknikko_frame, asiakkaat_valikko, laitteet_valikko))
     teknikot.asiakkaat_valikko_nimet(asiakkaat_valikko)
 
-    laitteet_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse asiakkaan laite", 10, 8)
+    laitteet_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse asiakkaan laite", 10, 7)
     laitteet_valikko.bind("<<ComboboxSelected>>", lambda event: teknikot.laitteet_valikko_event(event, \
         teknikko_frame, asiakkaat_valikko, laitteet_valikko, valmiusasteet_valikko, teknikot_valikko))
 
-    valmiusasteet_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse tiketin valmiusaste", 10, 10)
+    valmiusasteet_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse tiketin valmiusaste", 10, 11)
     
-    teknikot_valikko = common_tkinter.luo_valikko(teknikko_frame, "Tikettiä työstävä teknikko", 10, 20)
+    teknikot_valikko = common_tkinter.luo_valikko(teknikko_frame, "Tikettiä työstävä teknikko", 10, 15)
     teknikot.teknikot_valikko_nimet(teknikot_valikko)
 
     # Button tallentaa tiketin valmiusasteen
-    common_tkinter.luo_button(teknikko_frame, "Tallenna tiketti", lambda:teknikot.tallenna_tiketti(asiakkaat_valikko, laitteet_valikko, valmiusasteet_valikko, teknikot_valikko), 10, 22)
+    common_tkinter.luo_button(teknikko_frame, "Tallenna tiketti", lambda:teknikot.tallenna_tiketti(asiakkaat_valikko, laitteet_valikko, valmiusasteet_valikko, teknikot_valikko), 10, 21, 200)
 # -------------------------------------------------------------------

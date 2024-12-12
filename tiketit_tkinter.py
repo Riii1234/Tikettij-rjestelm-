@@ -53,10 +53,10 @@ def asiakas_tiedot(tiketti_frame, vanhat_laitteet_valikko):
     asiakas_email = tk.StringVar()
     asiakas_muuttujat = [asiakas_nimi, asiakas_osoite, asiakas_puh_numero, asiakas_email]
     
-    common_tkinter.luo_labelit_ja_entryt(tiketti_frame, label_tekstit, asiakas_entryt, asiakas_muuttujat, 1, 5)
+    common_tkinter.luo_labelit_ja_entryt(tiketti_frame, label_tekstit, asiakas_entryt, asiakas_muuttujat, 0, 5)
 
     # Button hakee vanhan asiakkaan tiedot nimen perusteella
-    common_tkinter.luo_button(tiketti_frame, "Hae asiakkaan tiedot", lambda:vanha_asiakas(asiakas_muuttujat, asiakas_entryt, vanhat_laitteet_valikko), 1, 7)
+    common_tkinter.luo_button(tiketti_frame, "Hae asiakkaan tiedot", lambda:vanha_asiakas(asiakas_muuttujat, asiakas_entryt, vanhat_laitteet_valikko), 0, 7, 10)
 
     return asiakas_muuttujat
 # -------------------------------------------------------------------
@@ -82,7 +82,7 @@ def laite_tiedot(tiketti_frame, asiakas_muuttujat, vanhat_laitteet_valikko):
     common_tkinter.luo_labelit_ja_entryt(tiketti_frame, label_tekstit, laite_entryt, laite_muuttujat, 10, 5)
 
     # Haetaan vanhan laitteen tiedot mallin perusteella
-    common_tkinter.luo_button(tiketti_frame, "Hae laitteen tiedot", lambda:vanhat_laitteet_nappi(laite_malli, laite_entryt, asiakas_muuttujat), 10, 7)
+    common_tkinter.luo_button(tiketti_frame, "Hae laitteen tiedot", lambda:vanhat_laitteet_nappi(laite_malli, laite_entryt, asiakas_muuttujat), 10, 7, 10)
     
     # Vanhat laitteet valikko bindattuna funktioon (Funktio tapahtuu joka kerta, kun valikkoa vaihdetaan)
     vanhat_laitteet_valikko.bind("<<ComboboxSelected>>", lambda event: vanha_laite_valikko(event, laite_entryt, asiakas_muuttujat, vanhat_laitteet_valikko))
@@ -92,14 +92,14 @@ def laite_tiedot(tiketti_frame, asiakas_muuttujat, vanhat_laitteet_valikko):
 def vikakuvaus(tiketti_frame):
     """Luo monirivisen teksti-kentän vikakuvaukselle"""
     
-    common_tkinter.luo_label(tiketti_frame, "Laitteen vikakuvaus: ", "white.TLabel", 1, 20, 10, 6, 0)
+    common_tkinter.luo_label(tiketti_frame, "Laitteen vikakuvaus: ", "white.TLabel", 0, 21, 10, 6, 0)
 
-    vikakuvaus_entry = common_tkinter.luo_teksti_kentta(tiketti_frame, 1, 21, 6)
+    vikakuvaus_entry = common_tkinter.luo_teksti_kentta(tiketti_frame, 0, 22, 6)
 
     return vikakuvaus_entry
 # -------------------------------------------------------------------
 def tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry):
     """Luo buttonin tiketin tallentamiseksi"""
 
-    common_tkinter.luo_button(tiketti_frame, "Tallenna tiedot", lambda:tietojen_tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry), 10, 21)
+    common_tkinter.luo_button(tiketti_frame, "Tallenna tiedot", lambda:tietojen_tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry), 10, 23, 40)
 # -------------------------------------------------------------------
