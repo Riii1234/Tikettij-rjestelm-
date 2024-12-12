@@ -64,16 +64,13 @@ def luo_terminaalin_sisalto(root):
 def luo_buttons(frame, tiketti_frame, haku_frame, teknikko_frame):
     """Luo välilehtien vaihtamiseen button-widgetit"""
 
-    b1 = ttk.Button(frame, text = "Luo uusi tiketti", style = "bw.TButton",  \
-        command = lambda:tiketti_frame.tkraise())
+    b1 = ttk.Button(frame, text = "Luo uusi tiketti", style = "bw.TButton", command = lambda:tiketti_frame.tkraise())
     b1.place(x = 1, y = 1, anchor = tk.NW)
 
-    b2 = ttk.Button(frame, text = "Haku", style = "bw.TButton",  \
-        command = lambda:haku_frame.tkraise())
+    b2 = ttk.Button(frame, text = "Haku", style = "bw.TButton", command = lambda:haku_frame.tkraise())
     b2.place(x = 110, y = 1, anchor = tk.NW)
 
-    b2 = ttk.Button(frame, text = "Teknikot", style = "bw.TButton",  \
-        command = lambda:teknikko_frame.tkraise())
+    b2 = ttk.Button(frame, text = "Teknikot", style = "bw.TButton", command = lambda:teknikko_frame.tkraise())
     b2.place(x = 199, y = 1, anchor = tk.NW)
 # -------------------------------------------------------------------
 def luo_etusivu_otsikko(etusivu_frame):
