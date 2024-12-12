@@ -48,33 +48,33 @@ def hae_tiedot_ja_tayta_tekstikentta(valinta, avain, tiedosto, tekstikentta, ava
 def aseta_laite_valikko_tiedot(laite_valikko, valikko_avain):
     """Hakee ja täyttää laite-valikon tiedoilla"""
 
-    tiedot = common.hae_tiedot_useita(valikko_avain, "laitetiedot.txt", "erilaiset", [])
-    common.aseta_valikko(laite_valikko, tiedot)
+    tieto_lista = common.hae_tieto_lista(valikko_avain, "laitetiedot.txt", "erilaiset", [])
+    common.aseta_valikko(laite_valikko, tieto_lista)
 # -------------------------------------------------------------------
 def luo_laite_valikko_event(event, laite_valikko, valikko_avain, laite_tekstikentta):
     """Täyttää tekstikentän, kun valikon valintaa vaihdetaan"""
 
     laite_valinta = laite_valikko.get()
 
-    tiedot_lista = common.hae_tietoja(laite_valinta, valikko_avain, "laitetiedot.txt")
+    laite_idt_ja_tiedot_lista = common.hae_tietoja(laite_valinta, valikko_avain, "laitetiedot.txt")
 
-    laitteen_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
-    laitteen_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    laite_tekstit = ["Malli:", "Tyyppi:", "Sarjanumero:", "Tuotetunnus:", "Lisätiedot:"]
+    laite_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
     valilyonti_maarat = [13, 10, 1, 2, 6]
 
-    tietojen_taytto_useat(laite_tekstikentta, tiedot_lista, laitteen_avaimet, laitteen_tekstit, laite_valinta, valilyonti_maarat)
+    tietojen_taytto_useat(laite_tekstikentta, laite_idt_ja_tiedot_lista, laite_avaimet, laite_tekstit, laite_valinta, valilyonti_maarat)
 # -------------------------------------------------------------------
-def tietojen_taytto_useat(tekstikentta, tiedot_lista, avaimet, tekstit, valinta, valilyonti_maarat):
+def tietojen_taytto_useat(tekstikentta, idt_ja_tiedot_lista, avaimet, tekstit, valinta, valilyonti_maarat):
     """Täyttää tiedot entryyn"""
 
     tekstikentta.delete('1.0', tk.END)
 
     laskuri = 0
-    for tiedot in tiedot_lista:
+    for tiedot in idt_ja_tiedot_lista:
 
         if laskuri % 2 == 0:
             laskuri += 1
-        elif laskuri < len(tiedot_lista) - 1:
+        elif laskuri < len(idt_ja_tiedot_lista) - 1:
             tietojen_taytto_entryyn(tiedot, tekstikentta, avaimet, tekstit, valinta, "\n\n", valilyonti_maarat)
             laskuri += 1
         else:
@@ -91,19 +91,19 @@ def tietojen_taytto_entryyn(tiedot, tekstikentta, avaimet, tekstit, valinta, riv
     else:
         tekstikentta.insert(tk.END, f"{tekstit[i]} {" " * valilyonti_maarat[i]} {tiedot[avaimet[i]]}{rivinvaihto}")
 # -------------------------------------------------------------------
-def tietojen_taytto_useat_id(tekstikentta, tiedot_lista, avaimet, tekstit, valinta, tiketin_id_teksti, valilyonti_maarat):
+def tietojen_taytto_useat_id(tekstikentta, idt_ja_tiedot_lista, avaimet, tekstit, valinta, tiketti_id_teksti, valilyonti_maarat):
     """Täyttää tiedot entryyn + tiketin ID"""
 
     tekstikentta.delete('1.0', tk.END)
 
     laskuri = 0
-    for tiedot in tiedot_lista:
+    for tiedot in idt_ja_tiedot_lista:
         
         if laskuri % 2 == 0:
-            tekstikentta.insert(tk.END, f"{tiketin_id_teksti} {" "*18} {tiedot}\n")
+            tekstikentta.insert(tk.END, f"{tiketti_id_teksti} {" "*18} {tiedot}\n")
             laskuri += 1
 
-        elif laskuri < len(tiedot_lista) - 1:
+        elif laskuri < len(idt_ja_tiedot_lista) - 1:
             tietojen_taytto_entryyn(tiedot, tekstikentta, avaimet, tekstit, valinta, "\n\n", valilyonti_maarat)
             laskuri += 1
         else:
@@ -112,33 +112,31 @@ def tietojen_taytto_useat_id(tekstikentta, tiedot_lista, avaimet, tekstit, valin
 def tiketit_haku_valmiusaste(valmiusaste_valikko):
     """Valmiusasteiden asetus valikkoon"""
 
-    tiedot = ["Vastaanotettu", "Työnalla", "Valmis"]
+    tieto_lista = ["Vastaanotettu", "Työnalla", "Valmis"]
 
-    common.aseta_valikko(valmiusaste_valikko, tiedot)
+    common.aseta_valikko(valmiusaste_valikko, tieto_lista)
 # -------------------------------------------------------------------
 def valmiusaste_valikko_event(event, valmiusaste_valikko, tiketti_tekstikentta):
     """Tikettien tietojen haku valmiusasteen perusteella"""
 
-    tiedosto = "tikettitiedot.txt"
-
     valittu_valmiusaste = valmiusaste_valikko.get()
 
-    tiketin_id_teksti = "Tiketin ID:"
-    tiketin_tekstit = ["Asiakkaan nimi:", "Laitteen sarjanumero:", "Valmiusaste:", "Teknikon nimi:", "Laitteen vika:"]
-    tiketin_avaimet = ["asiakas_nimi", "laite_sarjanumero", "valmiusaste", "teknikko_nimi", "vika"]
+    tiketti_id_teksti = "Tiketin ID:"
+    tiketti_tekstit = ["Asiakkaan nimi:", "Laitteen sarjanumero:", "Valmiusaste:", "Teknikon nimi:", "Laitteen vika:"]
+    tiketti_avaimet = ["asiakas_nimi", "laite_sarjanumero", "valmiusaste", "teknikko_nimi", "vika"]
     valilyonti_maarat = [9, 1, 0, 11, 13]
 
-    tiketin_tiedot_lista = common.hae_tietoja(valittu_valmiusaste, "valmiusaste", tiedosto)
+    tiketti_idt_ja_tiedot_lista = common.hae_tietoja(valittu_valmiusaste, "valmiusaste", "tikettitiedot.txt")
 
-    tiedot_lista = asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista)
+    idt_ja_tiedot_lista = asiakas_nimet_ja_laite_sarjanumerot(tiketti_idt_ja_tiedot_lista)
 
-    tietojen_taytto_useat_id(tiketti_tekstikentta, tiedot_lista, tiketin_avaimet, tiketin_tekstit, valittu_valmiusaste, tiketin_id_teksti, valilyonti_maarat)
+    tietojen_taytto_useat_id(tiketti_tekstikentta, idt_ja_tiedot_lista, tiketti_avaimet, tiketti_tekstit, valittu_valmiusaste, tiketti_id_teksti, valilyonti_maarat)
 # -------------------------------------------------------------------
-def asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista):
+def asiakas_nimet_ja_laite_sarjanumerot(idt_ja_tiedot_lista):
 
     laskuri = 0
     lista = []
-    for tieto in tiketin_tiedot_lista:
+    for tieto in idt_ja_tiedot_lista:
 
         if laskuri % 2 == 0:
             lista.append(tieto)
@@ -150,5 +148,5 @@ def asiakas_nimet_ja_laite_sarjanumerot(tiketin_tiedot_lista):
             tieto["teknikko_nimi"] = common.hae_tieto_id(tieto["teknikko_id"], "nimi", "teknikkotiedot.txt")
             laskuri += 1
 
-    print("asiakas_nimet_ja_laite_sarjanumerot - tiketin_tiedot_lista", tiketin_tiedot_lista)
-    return tiketin_tiedot_lista
+    print("asiakas_nimet_ja_laite_sarjanumerot - idt_ja_tiedot_lista", idt_ja_tiedot_lista)
+    return idt_ja_tiedot_lista

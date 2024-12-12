@@ -149,7 +149,7 @@ def laitteet_valikko_event(event, teknikot_frame, asiakkaat_combobox, laitteet_c
 def teknikot_valikko_nimet(teknikot_combobox):
     """Täytetään teknikkojen nimet valikkoon"""
 
-    teknikot_nimet = common.hae_tiedot_useita("nimi", "teknikkotiedot.txt", "kaikki", [])
+    teknikot_nimet = common.hae_tieto_lista("nimi", "teknikkotiedot.txt", "erilaiset", [])
 
     common.aseta_valikko(teknikot_combobox, teknikot_nimet)
 # -------------------------------------------------------------------

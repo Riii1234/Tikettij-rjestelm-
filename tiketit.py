@@ -1,6 +1,7 @@
 import globals
 import tkinter as tk
 import common
+import common_tkinter
 from asiakkaat import uusi_asiakas
 from laitteet import uusi_laite
 # -------------------------------------------------------------------
@@ -56,6 +57,7 @@ def tietojen_tallennus(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muutt
     
         # Tallentaa tiketin tiedot tiedostoon
         common.tallenna_tiedostoon(tiketit_sanakirja, tiketti_id, tiedosto)
+        #common_tkinter.luo_label(tiketti_frame, "Tiedot tallennettu!", tyyli, pystyrivi, vaakarivi, x, y)
         #tee_label_teksti(tiketti_frame, "Tiedot tallennettu!", 345, 550)
         print("tietojen_tallennus onnistui")
 # -------------------------------------------------------------------

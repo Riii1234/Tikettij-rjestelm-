@@ -6,14 +6,14 @@ import haku
 def luo_haku_toiminnot(haku_frame):
     """Luo tiedonhaku-välilehdelle widgetit"""
 
-    # tee_label(frame, teksti, tyyli, pystyrivi, vaakarivi, x, y)
-    common_tkinter.luo_label(haku_frame, "Asiakastiedot", "white2.TLabel", 0, 1, 10, 50)
+    # tee_label(frame, teksti, tyyli, pystyrivi, vaakarivi, x, y1, y2)
+    common_tkinter.luo_label(haku_frame, "Asiakastiedot", "white2.TLabel", 0, 1, 10, 50, 10)
     luo_asiakastieto_haku(haku_frame)
 
-    common_tkinter.luo_label(haku_frame, "Laitetiedot", "white2.TLabel", 10, 1, 10, 50)
+    common_tkinter.luo_label(haku_frame, "Laitetiedot", "white2.TLabel", 10, 1, 10, 50, 10)
     luo_laitetieto_haku(haku_frame)
 
-    common_tkinter.luo_label(haku_frame, "Tikettitiedot", "white2.TLabel", 20, 1, 10, 50)
+    common_tkinter.luo_label(haku_frame, "Tikettitiedot", "white2.TLabel", 20, 1, 10, 50, 10)
     luo_valmiusaste_haku(haku_frame)
 # -------------------------------------------------------------------
 def luo_asiakastieto_haku(haku_frame):
@@ -34,12 +34,12 @@ def luo_asiakastieto_haku(haku_frame):
 
     asiakas_tekstikentta = common_tkinter.luo_teksti_kentta(haku_frame, 1, 20, 16)
 
-    common_tkinter.luo_button(haku_frame, "Hae asiakkaan tiedot", lambda:haku.hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta), 1, 16)
+    common_tkinter.luo_button(haku_frame, "Hae asiakkaan tiedot", lambda:haku.hae_asiakas_tiedot(asiakas_entryt, asiakas_tekstikentta), 1, 7)
 # -------------------------------------------------------------------
 def luo_laitetieto_haku(haku_frame):
     """Luo widgetit laitteen tietojen hakuun laitteen sarjanumerolla"""
 
-    common_tkinter.luo_label(haku_frame, "Laitteen sarjanumero:", "white.TLabel", 10, 3, 10, 6)
+    common_tkinter.luo_label(haku_frame, "Laitteen sarjanumero:", "white.TLabel", 10, 3, 10, 6, 0)
 
     laite_sarjanumero = tk.StringVar()
     laite_sarjanumero_entry = common_tkinter.luo_entry(haku_frame, laite_sarjanumero, 10, 4, 10, 2)

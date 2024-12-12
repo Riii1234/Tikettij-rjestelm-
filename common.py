@@ -88,24 +88,35 @@ def hae_tiedot(id_tai_tieto: str, avain: str, tiedosto: str, haku_valinta):
                 return tiedot
     return ""
 # ------------------------------------------------------------------- 
-def hae_tiedot_useita(avain: str, tiedosto: str, haku_valinta: str, id_lista: list):
+def hae_tieto_lista(avain: str, tiedosto: str, haku_valinta: str, id_lista: list):
     """Hakee avaimen kaikki tiedot"""
 
     sanakirja = avaa_tiedosto(tiedosto)
     lista = []
 
     for id, tiedot in sanakirja.items():
-        
-        if haku_valinta == "kaikki":
-            lista.append(tiedot[avain])
 
-        elif haku_valinta == "erilaiset":
+        if haku_valinta == "erilaiset":
             if tiedot[avain] not in lista:
                 lista.append(tiedot[avain])
 
         elif haku_valinta == "id_lista":
             if id in id_lista:
                 lista.append(tiedot[avain])
+
+    return lista
+# -------------------------------------------------------------------
+def hae_tietoja(tieto, avain, tiedosto):
+    """Hakee kaikkien täsmäävien ID:n ja tiedot"""
+
+    sanakirja = avaa_tiedosto(tiedosto)
+    lista = []
+
+    for id, tiedot in sanakirja.items():
+        
+        if tiedot[avain] == tieto:
+            lista.append(id)
+            lista.append(tiedot)
 
     return lista
 # -------------------------------------------------------------------
@@ -127,20 +138,6 @@ def hae_tieto_id(annettu_id: str, mika_tieto: str, tiedosto: str):
         if annettu_id == id:
             return tiedot[mika_tieto]
     return "-"
-# -------------------------------------------------------------------
-def hae_tietoja(mika_tieto, tieto_nimike, tiedosto):
-    """Kaikkien täsmäävien tiedot"""
-
-    sanakirja = avaa_tiedosto(tiedosto)
-    lista = []
-
-    for id, tiedot in sanakirja.items():
-        
-        if tiedot[tieto_nimike] == mika_tieto:
-            lista.append(id)
-            lista.append(tiedot)
-
-    return lista
 # -------------------------------------------------------------------
 def hae_id(tiedot_lista: list, tiedosto: str, tieto: str):
     """Hakee ID:n entryn tiedolla sanakirjasta"""
@@ -180,9 +177,9 @@ def lue_tiedot(tiedot):
 
     return tiedot_lista
 # -------------------------------------------------------------------
-def aseta_valikko(valikko, tiedot):
+def aseta_valikko(valikko, tieto_lista):
     """Asettaa tiedot valikkoon"""
 
-    valikko.configure(values = tiedot)
-    valikko.set(tiedot[0])
+    valikko.configure(values = tieto_lista)
+    valikko.set(tieto_lista[0])
 # -------------------------------------------------------------------
