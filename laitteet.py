@@ -2,41 +2,41 @@ import globals
 import common
 import tkinter as tk
 # -------------------------------------------------------------------
-def uusi_laite(laitteen_tiedot_lista):
+def luo_uusi_laite(laite_tiedot_lista):
     """Luo uudelle laitteelle ID:n ja ottaa vastaan laitteen tiedot"""
 
     tiedosto = "laitetiedot.txt"
     # Lukee tiedostosta olemassa olevien laitteiden tiedot sanakirjaan
-    laitteet_sanakirja = common.avaa_tiedosto(tiedosto)
+    laite_sanakirja = common.avaa_tiedosto(tiedosto)
 
     # Laskee montako laitetta on jo olemassa ID:n luomista varten
-    montako = common.id_lukumaara(laitteet_sanakirja)
+    montako = common.laske_id_lukumaara(laite_sanakirja)
 
     # Luo uudelle laitteelle ID-tunnuksen
     id = common.luo_uusi_id("la-", montako)
 
-    laitteen_tiedot_nimikkeet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
+    laite_avaimet = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
     # Kirjataan laitteen tiedot sanakirjaan
-    sanakirja = common.lisaa_tiedot_sanakirjaan(laitteen_tiedot_lista, laitteen_tiedot_nimikkeet)
+    sanakirja = common.lisaa_tiedot_sanakirjaan(laite_tiedot_lista, laite_avaimet)
 
     print("uusi_laite sanakirja", sanakirja)
-    laitteet_sanakirja[id] = sanakirja
+    laite_sanakirja[id] = sanakirja
 
     # Tallentaa laitteen tiedot tiedostoon
-    common.tallenna_tiedostoon(laitteet_sanakirja, id, tiedosto)
+    common.tallenna_tiedostoon(laite_sanakirja, id, tiedosto)
     return id
 # -------------------------------------------------------------------
-def vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli):
-    """Hakee vanhan laitteen tiedot mallin avulla"""
+def hae_laite_tiedot_mallilla(laite_entryt, asiakas_muuttujat, laite_malli):
+    """Hakee vanhan laitteen tiedot mallin avullaja täyttää sen perusteella tiedot entryihin"""
 
-    haettavat_laitteet = vanhat_laitteet(asiakkaan_tiedot)
+    haettavat_laitteet = hae_vanhat_laitteet(asiakas_muuttujat)
 
-    laitteet_sanakirja = common.avaa_tiedosto("laitetiedot.txt")
+    laite_sanakirja = common.avaa_tiedosto("laitetiedot.txt")
     
     print("vanha_laite laite_malli", laite_malli)
     lista = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
     # Tiedot sisältävät laite_id, malli, tyyppi, sarjanumero, tuotetunnus ja lisätiedot
-    for id, tiedot in laitteet_sanakirja.items():
+    for id, tiedot in laite_sanakirja.items():
         if id in haettavat_laitteet:
 
             if laite_malli == tiedot["malli"]:
@@ -44,58 +44,56 @@ def vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli):
 
                 for i in range(0, 5):
                     # Sijoitetaan tiedot terminaaliin
-                    laitteen_entryt[i].delete(0, tk.END)
-                    laitteen_entryt[i].insert(0, tiedot[lista[i]])
-
+                    laite_entryt[i].delete(0, tk.END)
+                    laite_entryt[i].insert(0, tiedot[lista[i]])
 # -------------------------------------------------------------------
-def vanhat_laitteet_nappi(laitteen_malli, laitteen_entryt, asiakkaan_tiedot):
+def hae_laite_tiedot(laite_malli_muuttuja, laite_entryt, asiakas_muuttujat):
     """Hakee laitteen mallin entry-widgetistä"""
 
-    laite_malli = laitteen_malli.get()
-    print("vanhat_laitteet_nappi - laite_malli", laite_malli)
+    laite_malli = laite_malli_muuttuja.get()
 
-    vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli)
+    hae_laite_tiedot_mallilla(laite_entryt, asiakas_muuttujat, laite_malli)
 # -------------------------------------------------------------------
-def vanha_laite_valikko(event, laitteen_entryt, asiakkaan_tiedot, vanhat_laitteet_combobox):
+def tayta_vanha_laite_tiedot(event, laite_entryt, asiakas_muuttujat, vanhat_laitteet_valikko):
     """Antaa tällä hetkellä valitun laitteen valikosta"""
 
-    laite_malli = vanhat_laitteet_combobox.get()
+    laite_malli = vanhat_laitteet_valikko.get()
 
-    vanha_laite(laitteen_entryt, asiakkaan_tiedot, laite_malli)
+    hae_laite_tiedot_mallilla(laite_entryt, asiakas_muuttujat, laite_malli)
 # -------------------------------------------------------------------
-def vanhat_laitteet(asiakkaan_tiedot):
+def hae_vanhat_laitteet(asiakas_muuttujat):
     """Hakee vanhat laitteet asiakkaan ID:llä"""
 
     #print("vanhat_laitteet asiakkaan_tiedot", asiakkaan_tiedot)
 
-    asiakas_id = common.hae_id(asiakkaan_tiedot, "asiakastiedot.txt", "nimi")
+    asiakas_id = common.hae_id(asiakas_muuttujat, "asiakastiedot.txt", "nimi")
     print("vanhat_laitteet asiakas_id", asiakas_id)
   
-    tiketit_sanakirja = common.avaa_tiedosto("tikettitiedot.txt")
+    tiketti_sanakirja = common.avaa_tiedosto("tikettitiedot.txt")
     # Haetaan kaikki asiakkaan laitteet tiketeistä
     haettavat_laitteet = []
-    for tiketti, tiedot in tiketit_sanakirja.items():
+    for tiketti, tiedot in tiketti_sanakirja.items():
         if asiakas_id == tiedot["asiakas_id"]:
             haettavat_laitteet.append(tiedot["laite_id"])
 
     return haettavat_laitteet
 # -------------------------------------------------------------------
-def vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_valikko):
+def aseta_vanhat_laitteet_valikko(asiakas_muuttujat, vanhat_laitteet_valikko):
     """Asettaa asiakkaan vanhat laitteet valikkoon"""
 
-    laitteet_lista = vanhat_laite_mallit(asiakkaan_tiedot)
+    laitteet_lista = hae_vanhat_laite_mallit(asiakas_muuttujat)
 
     common.aseta_valikko(vanhat_laitteet_valikko, laitteet_lista)
 # -------------------------------------------------------------------
-def vanhat_laite_mallit(asiakkaan_tiedot):
+def hae_vanhat_laite_mallit(asiakas_muuttujat):
     """Hakee laitteiden mallit"""
 
-    haettavat_laitteet = vanhat_laitteet(asiakkaan_tiedot)
+    haettavat_laitteet = hae_vanhat_laitteet(asiakas_muuttujat)
 
-    laitteet_sanakirja = common.avaa_tiedosto("laitetiedot.txt")
+    laite_sanakirja = common.avaa_tiedosto("laitetiedot.txt")
     laite_mallit = []
 
-    for id, tiedot in laitteet_sanakirja.items():
+    for id, tiedot in laite_sanakirja.items():
         if id in haettavat_laitteet:
             laite_mallit.append(tiedot["malli"])
 

@@ -25,7 +25,7 @@ def avaa_tiedosto(tiedosto :str):
 
     return sanakirja
 # -------------------------------------------------------------------
-def id_lukumaara(sanakirja :dict):
+def laske_id_lukumaara(sanakirja :dict):
     """Laskee montako ID:tä sanakirjassa on jo olemassa uuden ID:n luomista varten"""
     laskuri = 0
 
@@ -34,9 +34,9 @@ def id_lukumaara(sanakirja :dict):
 
     return laskuri
 # -------------------------------------------------------------------
-def luo_uusi_id(tunnus :str, montako :int):
+def luo_uusi_id(tunnus :str, lukumaara :int):
     """Luo uuden ID:n tunnuksesta (asiakas, laite, tiketti tai teknikko) ja riippuen ID:ein määrästä"""
-    id = tunnus + str(montako)
+    id = tunnus + str(lukumaara)
 
     while len(id) < 8:
         id = id[:3] + str(0) + id[3:]
@@ -89,7 +89,7 @@ def hae_tiedot(id_tai_tieto: str, avain: str, tiedosto: str, haku_valinta):
     return ""
 # ------------------------------------------------------------------- 
 def hae_tieto_lista(avain: str, tiedosto: str, haku_valinta: str, id_lista: list):
-    """Hakee avaimen kaikki tiedot"""
+    """Hakee avaimen tiedot listaan"""
 
     sanakirja = avaa_tiedosto(tiedosto)
     lista = []
@@ -121,7 +121,7 @@ def hae_tietoja(tieto, avain, tiedosto):
     return lista
 # -------------------------------------------------------------------
 def hae_id_tiedolla(tieto: str, milla_tiedolla: str, tiedosto: str):
-    """ID:n haku tiedolla"""
+    """Hakee ID:n tiedolla"""
 
     sanakirja = avaa_tiedosto(tiedosto)
 
@@ -130,7 +130,7 @@ def hae_id_tiedolla(tieto: str, milla_tiedolla: str, tiedosto: str):
             return id
 # -------------------------------------------------------------------
 def hae_tieto_id(annettu_id: str, mika_tieto: str, tiedosto: str):
-    """Tiedon haku ID:llä"""
+    """Hakee tiedon ID:llä"""
 
     sanakirja = avaa_tiedosto(tiedosto)
 
@@ -167,12 +167,12 @@ def lisaa_tiedot_sanakirjaan(tiedot_lista: list, tieto_nimikkeet: list):
 
     return sanakirja
 # -------------------------------------------------------------------
-def lue_tiedot(tiedot):
-    """Lue tiedot entryistä listaan"""
+def lue_tiedot(muuttujat):
+    """Lukee tiedot entryistä listaan"""
 
     tiedot_lista = []
-    for i in tiedot:
-        tieto = i.get()
+    for muuttuja in muuttujat:
+        tieto = muuttuja.get()
         tiedot_lista.append(tieto)
 
     return tiedot_lista

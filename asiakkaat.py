@@ -1,34 +1,34 @@
 import globals
 import common
-from laitteet import vanhat_laitteet_valikko
+import laitteet
 import tkinter as tk
 # -------------------------------------------------------------------
-def uusi_asiakas(asiakas_tiedot_lista):
+def luo_uusi_asiakas(asiakas_tiedot_lista):
     """Luo uudelle asiakkaalle ID:n ja ottaa vastaan asiakkaan tiedot"""
 
     tiedosto = "asiakastiedot.txt"
     # Lukee tiedostosta olemassa olevien asiakkaiden tiedot sanakirjaan
-    asiakkaat_sanakirja = common.avaa_tiedosto(tiedosto)
+    asiakas_sanakirja = common.avaa_tiedosto(tiedosto)
 
-    asiakkaat_lukumaara = common.id_lukumaara(asiakkaat_sanakirja)
-    id = common.luo_uusi_id("as-", asiakkaat_lukumaara)
+    asiakas_lukumaara = common.laske_id_lukumaara(asiakas_sanakirja)
+    id = common.luo_uusi_id("as-", asiakas_lukumaara)
 
-    asiakas_tieto_nimikkeet = ["nimi", "osoite", "puh.numero", "email"]
+    asiakas_avaimet = ["nimi", "osoite", "puh.numero", "email"]
 
     # Kirjataan asiakkaan tiedot sanakirjaan
-    sanakirja = common.lisaa_tiedot_sanakirjaan(asiakas_tiedot_lista, asiakas_tieto_nimikkeet)
+    sanakirja = common.lisaa_tiedot_sanakirjaan(asiakas_tiedot_lista, asiakas_avaimet)
 
     print("uusi_asiakas sanakirja", sanakirja)
-    asiakkaat_sanakirja[id] = sanakirja
+    asiakas_sanakirja[id] = sanakirja
 
     # Tallentaa asiakkaan tiedot tiedostoon
-    common.tallenna_tiedostoon(asiakkaat_sanakirja, id, tiedosto)
+    common.tallenna_tiedostoon(asiakas_sanakirja, id, tiedosto)
     return id
 # -------------------------------------------------------------------
-def vanha_asiakas(asiakkaan_tiedot, asiakkaan_entryt, vanhat_laitteet_combobox):
+def hae_vanha_asiakas(asiakas_muuttujat, asiakas_entryt, vanhat_laitteet_valikko):
     """Haetaan vanhan asiakkaan tiedot ID:llä ja sijoitetaan entry-muuttujiin näkymään terminaaliin"""
 
-    asiakas_id = common.hae_id(asiakkaan_tiedot, "asiakastiedot.txt", "nimi")
+    asiakas_id = common.hae_id(asiakas_muuttujat, "asiakastiedot.txt", "nimi")
 
     # Tyhjä string, jos nimeä ei löytynyt
     if asiakas_id == "":
@@ -41,9 +41,9 @@ def vanha_asiakas(asiakkaan_tiedot, asiakkaan_entryt, vanhat_laitteet_combobox):
         #print("vanha_asiakas here2")
         for i in range(0, 4):
 
-            asiakkaan_entryt[i].delete(0, tk.END)
+            asiakas_entryt[i].delete(0, tk.END)
             # Sijoitetaan tiedot terminaaliin
-            asiakkaan_entryt[i].insert(0, tiedot[lista[i]])
+            asiakas_entryt[i].insert(0, tiedot[lista[i]])
 
-        vanhat_laitteet_valikko(asiakkaan_tiedot, vanhat_laitteet_combobox)
+        laitteet.aseta_vanhat_laitteet_valikko(asiakas_muuttujat, vanhat_laitteet_valikko)
 # -------------------------------------------------------------------

@@ -65,9 +65,9 @@ def luo_valmiusaste_haku(haku_frame):
 
     valmiusaste_valikko = common_tkinter.luo_valikko(haku_frame, "Tiketin valmiusaste", 20, 3, 10)
 
-    haku.tiketit_haku_valmiusaste(valmiusaste_valikko)
+    haku.aseta_valmiusaste_valikko_tiedot(valmiusaste_valikko)
 
     tiketti_tekstikentta = common_tkinter.luo_teksti_kentta(haku_frame, 20, 20, 16, 10, 10)
 
-    valmiusaste_valikko.bind("<<ComboboxSelected>>", lambda event: haku.valmiusaste_valikko_event(event, valmiusaste_valikko, tiketti_tekstikentta))
+    valmiusaste_valikko.bind("<<ComboboxSelected>>", lambda event: haku.luo_valmiusaste_valikko_event(event, valmiusaste_valikko, tiketti_tekstikentta))
 # -------------------------------------------------------------------

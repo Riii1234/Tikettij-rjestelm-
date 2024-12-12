@@ -1,7 +1,7 @@
 import common
 import common_tkinter
 # -------------------------------------------------------------------
-def uusi_teknikko(teknikko_frame, teknikko_muuttujat):
+def luo_uusi_teknikko(teknikko_frame, teknikko_muuttujat):
     """Luo uudelle teknikolle ID:n ja ottaa vastaan teknikon tiedot"""
 
     tiedosto = "teknikkotiedot.txt"
@@ -9,10 +9,10 @@ def uusi_teknikko(teknikko_frame, teknikko_muuttujat):
     teknikot_sanakirja = common.avaa_tiedosto(tiedosto)
 
     # Laskee montako teknikkoa on jo olemassa ID:n luomista varten
-    montako = common.id_lukumaara(teknikot_sanakirja)
+    lukumaara = common.laske_id_lukumaara(teknikot_sanakirja)
 
     # Luo uudelle teknikolle ID-tunnuksen
-    teknikko_id = common.luo_uusi_id("te-", montako)
+    teknikko_id = common.luo_uusi_id("te-", lukumaara)
 
     teknikko_avaimet = ["nimi", "puh.numero", "email"]
 
@@ -27,8 +27,8 @@ def uusi_teknikko(teknikko_frame, teknikko_muuttujat):
     common.tallenna_tiedostoon(teknikot_sanakirja, teknikko_id, tiedosto)
     common_tkinter.luo_label(teknikko_frame, "Teknikko tallennettu!", "white.TLabel", 0, 19, 100, 10, 10, 10)
 # -------------------------------------------------------------------
-def asiakkaat_valikko_nimet(asiakas_valikko):
-    """Täytetään asiakkaiden nimet valikkoon"""
+def aseta_asiakas_valikko_nimet(asiakas_valikko):
+    """Täyttää asiakkaiden nimet valikkoon"""
 
     asiakkaat_nimet = hae_mahdolliset_asiakkaat()
 
@@ -62,17 +62,17 @@ def hae_mahd_asiakas_idt():
 
     return mahd_asiakas_idt
 # -------------------------------------------------------------------
-def laitteet_valikko_mallit(event, asiakas_valikko, laite_valikko):
-    """Täytetään asiakkaan laitteiden mallit valikkoon"""
+def aseta_laitet_valikko_mallit(event, asiakas_valikko, laite_valikko):
+    """Täyttää asiakkaan laitteiden mallit valikkoon"""
 
-    laitteet_idt_ja_mallit = laitteen_valinta(asiakas_valikko)
+    laite_idt_ja_mallit = hae_laite_idt_ja_mallit(asiakas_valikko)
 
-    laite_valikko.configure(values = laitteet_idt_ja_mallit[1])
-    laite_valikko.set(laitteet_idt_ja_mallit[1][0])
+    laite_valikko.configure(values = laite_idt_ja_mallit[1])
+    laite_valikko.set(laite_idt_ja_mallit[1][0])
 
-    tiketti_id_ja_teknikko_id = vaihda_valittua_tikettia(asiakas_valikko, laite_valikko, laitteet_idt_ja_mallit)
+    tiketti_id_ja_teknikko_id = vaihda_valittua_tikettia(asiakas_valikko, laite_valikko, laite_idt_ja_mallit)
 # -------------------------------------------------------------------
-def laitteen_valinta(asiakas_valikko):
+def hae_laite_idt_ja_mallit(asiakas_valikko):
     """Haetaan valitun asiakkaan laitteet, joiden tiketti on vastaanotettu tai työnalla"""
 
     valittu_asiakas_nimi = asiakas_valikko.get()
@@ -127,9 +127,9 @@ def hae_idt_valinnoilla(asiakas_valikko, laite_valikko, laite_idt_ja_mallit):
 def laitteet_valikko_event(event, asiakas_valikko, laite_valikko, valmiusaste_valikko, teknikko_valikko):
     """Vaihtaa tiketin ID:tä, kun valittua laitetta vaihdetaan"""
 
-    laitteet_idt_ja_mallit = laitteen_valinta(asiakas_valikko)
+    laite_idt_ja_mallit = hae_laite_idt_ja_mallit(asiakas_valikko)
 
-    tiketti_id_ja_teknikko_id = vaihda_valittua_tikettia(asiakas_valikko, laite_valikko, laitteet_idt_ja_mallit)
+    tiketti_id_ja_teknikko_id = vaihda_valittua_tikettia(asiakas_valikko, laite_valikko, laite_idt_ja_mallit)
 
     tiketin_valmiusaste = common.hae_tieto_id(tiketti_id_ja_teknikko_id[0], "valmiusaste", "tikettitiedot.txt")
 
@@ -147,35 +147,34 @@ def laitteet_valikko_event(event, asiakas_valikko, laite_valikko, valmiusaste_va
 
     common.aseta_valikko(valmiusaste_valikko, valmiusasteet_lista)
 # -------------------------------------------------------------------
-def teknikot_valikko_nimet(teknikko_valikko):
-    """Täytetään teknikkojen nimet valikkoon"""
+def aseta_teknikko_valikko_nimet(teknikko_valikko):
+    """Täyttää teknikkojen nimet valikkoon"""
 
     teknikot_nimet = common.hae_tieto_lista("nimi", "teknikkotiedot.txt", "erilaiset", [])
 
     common.aseta_valikko(teknikko_valikko, teknikot_nimet)
 # -------------------------------------------------------------------
 def tallenna_tiketti(teknikko_frame, asiakas_valikko, laite_valikko, valmiusaste_valikko, teknikko_valikko):
+    """Tallentaa tiketin vaihdetun valmiusasteen ja mahdollisesti lisätyn teknikon tiedostoon"""
 
     tiedosto = "tikettitiedot.txt"
     tiketti_sanakirja = common.avaa_tiedosto(tiedosto)
 
-    laitteet_idt_ja_mallit = laitteen_valinta(asiakas_valikko)
-    tiketti_id_ja_teknikko_id = hae_idt_valinnoilla(asiakas_valikko, laite_valikko, laitteet_idt_ja_mallit)
+    laite_idt_ja_mallit = hae_laite_idt_ja_mallit(asiakas_valikko)
+    tiketti_id_ja_teknikko_id = hae_idt_valinnoilla(asiakas_valikko, laite_valikko, laite_idt_ja_mallit)
 
     if tiketti_id_ja_teknikko_id[1] == "":
         teknikko_nimi = teknikko_valikko.get()
-        teknikon_id = common.hae_id_tiedolla(teknikko_nimi, "nimi", "teknikkotiedot.txt")
+        teknikko_id = common.hae_id_tiedolla(teknikko_nimi, "nimi", "teknikkotiedot.txt")
     else:
-        teknikon_id = tiketti_id_ja_teknikko_id[1]
+        teknikko_id = tiketti_id_ja_teknikko_id[1]
 
     valmiusaste = valmiusaste_valikko.get()
 
     tiketti_sanakirja[tiketti_id_ja_teknikko_id[0]]["valmiusaste"] = valmiusaste
-    tiketti_sanakirja[tiketti_id_ja_teknikko_id[0]]["teknikko_id"] = teknikon_id
-    print("teknikon_id", teknikon_id)
+    tiketti_sanakirja[tiketti_id_ja_teknikko_id[0]]["teknikko_id"] = teknikko_id
+    print("teknikon_id", teknikko_id)
 
     common.tallenna_tiedosto(tiketti_sanakirja, tiedosto)
     common_tkinter.luo_label(teknikko_frame, "Tiketti tallennettu!", "white.TLabel", 10, 19, 10, 10, 10, 10)
 # -------------------------------------------------------------------
-
-
