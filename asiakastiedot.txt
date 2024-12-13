@@ -2,3 +2,5 @@ as-00000;nimi;Hei Heinen1;osoite;Katu 2331;puh.numero;04948-4441;email;joottain1
 as-00001;nimi;Hei Heinen2;osoite;Katu 2332;puh.numero;04948-4442;email;joottain2@gmail.com
 as-00002;nimi;Hei Heinen3;osoite;Katu 2333;puh.numero;04948-4443;email;joottain3@gmail.com
 as-00003;nimi;Testi;osoite;Sdfsd 123;puh.numero;21321321;email;sdfsd@sdfsd.com
+as-00004;nimi;Uusi asiakas;osoite;osoiteeee;puh.numero;puhnumerrooo;email;email@email.com
+as-00005;nimi;sdhfhsh;osoite;hsdfhsh;puh.numero;47373;email;sdgsg

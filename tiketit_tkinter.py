@@ -5,7 +5,7 @@ import tiketit
 import asiakkaat
 import laitteet
 # -------------------------------------------------------------------
-def luo_tiketti_toiminnot(tiketti_frame):
+def luo_tiketti_toiminnot(tiketti_frame, asiakas_valikko):
     """Luo tiketit-välilehdelle widgetit"""
 
     tiketti_id = luo_tiketin_id(tiketti_frame)
@@ -17,7 +17,7 @@ def luo_tiketti_toiminnot(tiketti_frame):
 
     vikakuvaus_entry = luo_vikakuvaus(tiketti_frame)
 
-    luo_tallennus_button(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry)
+    luo_tallennus_button(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry, asiakas_valikko)
 # -------------------------------------------------------------------
 def luo_tiketin_id(tiketti_frame):
     """Luo uuden tiketin (ID)"""
@@ -100,9 +100,9 @@ def luo_vikakuvaus(tiketti_frame):
 
     return vikakuvaus_entry
 # -------------------------------------------------------------------
-def luo_tallennus_button(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry):
+def luo_tallennus_button(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry, asiakas_valikko):
     """Luo buttonin tiketin tallentamiseksi"""
 
     common_tkinter.luo_button(tiketti_frame, "Tallenna tiedot", \
-        lambda:tiketit.tallenna_tiedot(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry), 10, 25, 10, 10, 40)
+        lambda:tiketit.tallenna_tiedot(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry, asiakas_valikko), 10, 25, 10, 10, 40)
 # -------------------------------------------------------------------

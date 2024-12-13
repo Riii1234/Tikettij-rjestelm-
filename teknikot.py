@@ -62,7 +62,7 @@ def hae_mahd_asiakas_idt():
 
     return mahd_asiakas_idt
 # -------------------------------------------------------------------
-def aseta_laitet_valikko_mallit(event, asiakas_valikko, laite_valikko):
+def aseta_laite_valikko_mallit(event, asiakas_valikko, laite_valikko):
     """Täyttää asiakkaan laitteiden mallit valikkoon"""
 
     laite_idt_ja_mallit = hae_laite_idt_ja_mallit(asiakas_valikko)
@@ -89,8 +89,6 @@ def hae_laite_idt_ja_mallit(asiakas_valikko):
                 haettavat_laite_idt.append(tiedot["laite_id"])
 
     haettavat_laite_mallit = common.hae_tieto_lista("malli", "laitetiedot.txt", "id_lista", haettavat_laite_idt)
-    print("laitteen_valinta - haettavat_laitteet_idt", haettavat_laite_idt)
-    print("laitteen_valinta - haettavat_laite_mallit", haettavat_laite_mallit)
 
     return [haettavat_laite_idt, haettavat_laite_mallit]
 # -------------------------------------------------------------------
@@ -173,7 +171,6 @@ def tallenna_tiketti(teknikko_frame, asiakas_valikko, laite_valikko, valmiusaste
 
     tiketti_sanakirja[tiketti_id_ja_teknikko_id[0]]["valmiusaste"] = valmiusaste
     tiketti_sanakirja[tiketti_id_ja_teknikko_id[0]]["teknikko_id"] = teknikko_id
-    print("teknikon_id", teknikko_id)
 
     common.tallenna_tiedosto(tiketti_sanakirja, tiedosto)
     common_tkinter.luo_label(teknikko_frame, "Tiketti tallennettu!", "white.TLabel", 10, 19, 10, 10, 10, 10)

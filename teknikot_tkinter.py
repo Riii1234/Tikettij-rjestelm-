@@ -8,8 +8,8 @@ def luo_teknikko_toiminnot(teknikko_frame):
 
     luo_teknikko_tieto_widgetit(teknikko_frame)
 
-    luo_valmiusasteen_vaihto_widgetit(teknikko_frame)
-
+    asiakas_valikko = luo_valmiusasteen_vaihto_widgetit(teknikko_frame)
+    return asiakas_valikko
 # -------------------------------------------------------------------
 def luo_teknikko_tieto_widgetit(teknikko_frame):
     """Luo labelit ja entryt uuden teknikon tiedoille"""
@@ -40,7 +40,7 @@ def luo_valmiusasteen_vaihto_widgetit(teknikko_frame):
     common_tkinter.luo_label(teknikko_frame, "Vaihda tiketin valmiusastetta", "white2.TLabel", 10, 1, 10, 40, 60, 84)
 
     asiakas_valikko = common_tkinter.luo_valikko(teknikko_frame, "Valitse asiakas", 10, 3, 60)
-    asiakas_valikko.bind("<<ComboboxSelected>>", lambda event: teknikot.aseta_laitet_valikko_mallit(event, \
+    asiakas_valikko.bind("<<ComboboxSelected>>", lambda event: teknikot.aseta_laite_valikko_mallit(event, \
         asiakas_valikko, laite_valikko))
     teknikot.aseta_asiakas_valikko_nimet(asiakas_valikko)
 
@@ -56,4 +56,6 @@ def luo_valmiusasteen_vaihto_widgetit(teknikko_frame):
     # Button tallentaa tiketin valmiusasteen
     common_tkinter.luo_button(teknikko_frame, "Tallenna tiketti", \
         lambda:teknikot.tallenna_tiketti(teknikko_frame, asiakas_valikko, laite_valikko, valmiusaste_valikko, teknikko_valikko), 10, 20, 60, 10, 200)
+    
+    return asiakas_valikko
 # -------------------------------------------------------------------

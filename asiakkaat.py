@@ -18,7 +18,6 @@ def luo_uusi_asiakas(asiakas_tiedot_lista):
     # Kirjataan asiakkaan tiedot sanakirjaan
     sanakirja = common.lisaa_tiedot_sanakirjaan(asiakas_tiedot_lista, asiakas_avaimet)
 
-    print("uusi_asiakas sanakirja", sanakirja)
     asiakas_sanakirja[id] = sanakirja
 
     # Tallentaa asiakkaan tiedot tiedostoon

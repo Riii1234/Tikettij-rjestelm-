@@ -51,9 +51,10 @@ def luo_terminaalin_sisalto(root):
 
     # Funktiot välilehdillä oleville asioille
     luo_etusivu_otsikko(etusivu_frame)
-    luo_tiketti_toiminnot(tiketti_frame)
+    asiakas_valikko = luo_teknikko_toiminnot(teknikko_frame)
+    luo_tiketti_toiminnot(tiketti_frame, asiakas_valikko)
     luo_haku_toiminnot(haku_frame)
-    luo_teknikko_toiminnot(teknikko_frame)
+    
 
     # Aloitus-frame
     etusivu_frame.tkraise()

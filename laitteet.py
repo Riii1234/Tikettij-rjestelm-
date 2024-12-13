@@ -19,7 +19,6 @@ def luo_uusi_laite(laite_tiedot_lista):
     # Kirjataan laitteen tiedot sanakirjaan
     sanakirja = common.lisaa_tiedot_sanakirjaan(laite_tiedot_lista, laite_avaimet)
 
-    print("uusi_laite sanakirja", sanakirja)
     laite_sanakirja[id] = sanakirja
 
     # Tallentaa laitteen tiedot tiedostoon
@@ -33,7 +32,6 @@ def hae_laite_tiedot_mallilla(laite_entryt, asiakas_muuttujat, laite_malli):
 
     laite_sanakirja = common.avaa_tiedosto("laitetiedot.txt")
     
-    print("vanha_laite laite_malli", laite_malli)
     lista = ["malli", "tyyppi", "sarjanumero", "tuotetunnus", "lisa"]
     # Tiedot sisältävät laite_id, malli, tyyppi, sarjanumero, tuotetunnus ja lisätiedot
     for id, tiedot in laite_sanakirja.items():
@@ -67,7 +65,6 @@ def hae_vanhat_laitteet(asiakas_muuttujat):
     #print("vanhat_laitteet asiakkaan_tiedot", asiakkaan_tiedot)
 
     asiakas_id = common.hae_id(asiakas_muuttujat, "asiakastiedot.txt", "nimi")
-    print("vanhat_laitteet asiakas_id", asiakas_id)
   
     tiketti_sanakirja = common.avaa_tiedosto("tikettitiedot.txt")
     # Haetaan kaikki asiakkaan laitteet tiketeistä

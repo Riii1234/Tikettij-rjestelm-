@@ -5,3 +5,5 @@ ti-00003;asiakas_id;as-00002;laite_id;la-00003;valmiusaste;Valmis;teknikko_id;te
 ti-00004;asiakas_id;as-00000;laite_id;la-00000;valmiusaste;Valmis;teknikko_id;te-00001;vika;Näyttö rikki
 ti-00005;asiakas_id;as-00000;laite_id;la-00004;valmiusaste;Valmis;teknikko_id;te-00000;vika;Näyttö rikki
 ti-00006;asiakas_id;as-00003;laite_id;la-00005;valmiusaste;Vastaanotettu;teknikko_id;;vika;näyttö rikki
+ti-00007;asiakas_id;as-00004;laite_id;la-00006;valmiusaste;Vastaanotettu;teknikko_id;;vika;Ei toimi
+ti-00008;asiakas_id;as-00005;laite_id;la-00007;valmiusaste;Työnalla;teknikko_id;te-00002;vika;hhehe

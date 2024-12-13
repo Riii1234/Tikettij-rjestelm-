@@ -4,6 +4,7 @@ import common
 import common_tkinter
 import asiakkaat
 import laitteet
+import teknikot
 # -------------------------------------------------------------------
 def luo_uusi_tiketti():
     """Luo uudelle tiketille ID:n"""
@@ -19,7 +20,7 @@ def luo_uusi_tiketti():
 
     return id
 # -------------------------------------------------------------------
-def tallenna_tiedot(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry):
+def tallenna_tiedot(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttujat, vikakuvaus_entry, asiakas_valikko):
     """Tallentaa tiketin tiedot tiedostoon"""
     tiedosto = "tikettitiedot.txt"
 
@@ -57,7 +58,9 @@ def tallenna_tiedot(tiketti_frame, tiketti_id, asiakas_muuttujat, laite_muuttuja
         # Tallentaa tiketin tiedot tiedostoon
         common.tallenna_tiedostoon(tiketti_sanakirja, tiketti_id, tiedosto)
         common_tkinter.luo_label(tiketti_frame, "Tiedot tallennettu!", "white.TLabel", 10, 24, 10, 10, 10, 10)
-        print("tietojen_tallennus onnistui")
+        print("Tietojen_tallennus onnistui")
+
+        teknikot.aseta_asiakas_valikko_nimet(asiakas_valikko)
 # -------------------------------------------------------------------
 def luo_tai_hae_id(onko_uusi, uusi_funtio, tiedot_lista, muuttujat, tiketti_tiedot_lista, tiedosto, avain):
     """Luodaan tai haetaan asiakas_id tai laite_id"""
